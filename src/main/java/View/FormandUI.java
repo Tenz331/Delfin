@@ -1,7 +1,6 @@
 package View;
 
 import Model.Controller;
-import Util.DBConnect;
 
 import java.util.Scanner;
 
@@ -25,37 +24,37 @@ public class FormandUI {
         int input = Integer.parseInt(scanner.nextLine());
         switch (input) {
             case 1:
-                Controller.AddMember();
+                Controller.addMember();
                 printMenu();
                 break;
             case 2:
-                Controller.EditMember();
+                Controller.editMember();
                 printMenu();
 
                 break;
             case 3:
-                Controller.DeleteMember();
+                Controller.deleteMember();
                 printMenu();
 
                 break;
             case 4:
-                Controller.SeeRestance();
+                Controller.seeRestance();
                 printMenu();
                 break;
             case 5:
-                Controller.SeeKontigenter();
+                Controller.seeKontigenter();
                 printMenu();
                 break;
             case 6:
-                Controller.EditKontigenter();
+                Controller.editKontigenter();
                 printMenu();
                 break;
             case 7:
-                Controller.Top5Junior();
+                Controller.top5Junior();
                 printMenu();
                 break;
             case 8:
-                Controller.Top5Senior();
+                Controller.top5Senior();
                 printMenu();
                 break;
             case 9:

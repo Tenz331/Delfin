@@ -1,27 +1,27 @@
 package Model;
 
 public class Controller {
-    public static void AddMember() {
+    public static void addMember() {
     }
 
-    public static void Top5Senior() {
+    public static void top5Senior() {
     }
 
-    public static void Top5Junior() {
+    public static void top5Junior() {
     }
 
-    public static void EditKontigenter() {
+    public static void editKontigenter() {
     }
 
-    public static void SeeKontigenter() {
+    public static void seeKontigenter() {
     }
 
-    public static void SeeRestance() {
+    public static void seeRestance() {
     }
 
-    public static void DeleteMember() {
+    public static void deleteMember() {
     }
 
-    public static void EditMember() {
+    public static void editMember() {
     }
 }
