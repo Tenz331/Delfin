@@ -8,8 +8,7 @@ import java.util.Scanner;
 public class MainController { //Vores main controller og Main Menu
     String user;
     boolean sqlCheck = true; //boolean der bruges til: at søre for hvergang programmet retunere til vores main controller så  den ikke køre vores SQL check og update. Altså vi kan kontrolelre hvornår det skal ske 'initalizeSQLDB'
-    Scanner userInput = new Scanner(System.in);
-
+Scanner userInput = new Scanner(System.in);
 
 
     private void initalizeSQLDB(){
