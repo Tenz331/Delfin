@@ -1,16 +1,16 @@
 package Datamapper;
 
-import Model.Pizza;
+
 
 import java.sql.*;
 import java.util.ArrayList;
 
 public class MemberRead {
-    ArrayList<Pizza> tempPizzas = new ArrayList<Pizza>();
+    ArrayList<String> tempPizzas = new ArrayList<String>();
     private static final String USERNAME = "fullroot";
     private static final String PASSWORD = "fullroot";
     private static final String CONN_STR = "jdbc:mysql://cphb-gruppe1.c4mqzn3xlkdy.us-east-2.rds.amazonaws.com/";
-    public ArrayList<Pizza> getQueryJDBC() {
+    public ArrayList<String> getQueryJDBC() {
         //'Connection', 'Statement' and 'ResultSet' are AUTO-CLOSABLE when with TRY-WITH-RESOURCES BLOCK (...)
         try (
                 Connection conn = DriverManager.getConnection(CONN_STR, USERNAME, PASSWORD);
@@ -21,7 +21,7 @@ public class MemberRead {
 
                 StringBuffer buffer = new StringBuffer();
                 buffer.append("Pizza: " + rs.getInt("pizza_id") + " : " + rs.getString("pizza_name") + ", Price: " + rs.getDouble("pizza_price"));
-                Pizza temp = new Pizza(rs.getInt("pizza_id"), rs.getString("pizza_name"), rs.getDouble("pizza_price"), rs.getInt("pizza_status"));
+                String temp = new String(("pizza_name"));
                 tempPizzas.add(temp);
             }
         } catch (SQLException e) {
