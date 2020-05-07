@@ -28,7 +28,7 @@ public class MainController { //Vores main controller og Main Menu
          "d8888888a                                  `Y8888\n"+
         "AY/'' `\\Y8b                                  ``Y8b\n"+
         "Y'      `YP                                       ~~\n"+
-                "\nSvømmeklubben Delfinen Menu\n" +
+               "\n Svømmeklubben Delfinen Menu\n" +
                 " Press: [1] To create member. \n" +
                 " Press: [2] To show all orders. \n" +
                 " Press: [3] To show only active orders. \n" +
