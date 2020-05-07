@@ -2,8 +2,8 @@ package Model;
 
 public class JuniorMedlem extends Members {
 
-    public JuniorMedlem(int medlemsID, String name, String email, int tlfNr, String fodselsdag, String favSvommeArt, String svommeHold, double kontingent) {
-        super(medlemsID, name, email, tlfNr, fodselsdag, favSvommeArt, svommeHold, kontingent);
+    public JuniorMedlem(String name, String email, int tlfNr, String fodselsdag, String favSvommeArt, String svommeHold, double kontingent) {
+        super(name, email, tlfNr, fodselsdag, favSvommeArt, svommeHold, kontingent);
     }
 
     @Override
@@ -18,7 +18,7 @@ public class JuniorMedlem extends Members {
             kontingent = 1600;
             return kontingent;
         }
-        if (svommeHold  == "Pensionist") {
+        if (svommeHold  == "pensionist") {
             kontingent = 1600*75/100;
             return kontingent;
         }

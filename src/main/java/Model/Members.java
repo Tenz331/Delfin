@@ -1,7 +1,6 @@
 package Model;
 
 public abstract class Members {
-    int medlemsID;
     String name;
     String email;
     int tlfNr;
@@ -10,8 +9,7 @@ public abstract class Members {
     String svommeHold;
     double kontingent;
 
-    public Members(int medlemsID, String name, String email, int tlfNr, String fodselsdag, String favSvommeArt, String svommeHold, double kontingent) {
-        this.medlemsID = medlemsID;
+    public Members( String name, String email, int tlfNr, String fodselsdag, String favSvommeArt, String svommeHold, double kontingent) {
         this.name = name;
         this.email = email;
         this.tlfNr = tlfNr;
@@ -19,9 +17,6 @@ public abstract class Members {
         this.favSvommeArt = favSvommeArt;
         this.svommeHold = svommeHold;
         this.kontingent = kontingent;
-    }
-    public int getMedlemsID() {
-        return medlemsID;
     }
 
     public String getName() {
@@ -48,7 +43,7 @@ public abstract class Members {
         return svommeHold;
     }
 
-    public double getKontigent() {
+    public double getKontingent() {
         return kontingent;
     }
 
@@ -57,7 +52,6 @@ abstract public double kontigentBeregner();
     @Override
     public String toString() {
         return "Members{" +
-                "medlemsID=" + medlemsID +
                 ", name='" + name + '\'' +
                 ", email='" + email + '\'' +
                 ", tlfNr=" + tlfNr +
