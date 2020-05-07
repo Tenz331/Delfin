@@ -1,27 +1,22 @@
 package Model;
 
 public abstract class Members {
-    int medlemsID;
     String name;
     String email;
     int tlfNr;
     String fodselsdag;
     String favSvommeArt;
     String svommeHold;
-    double kontigent;
+    double kontingent;
 
-    public Members(int medlemsID, String name, String email, int tlfNr, String fodselsdag, String favSvommeArt, String svommeHold, double kontigent) {
-        this.medlemsID = medlemsID;
+    public Members( String name, String email, int tlfNr, String fodselsdag, String favSvommeArt, String svommeHold, double kontingent) {
         this.name = name;
         this.email = email;
         this.tlfNr = tlfNr;
         this.fodselsdag = fodselsdag;
         this.favSvommeArt = favSvommeArt;
         this.svommeHold = svommeHold;
-        this.kontigent = kontigent;
-    }
-    public int getMedlemsID() {
-        return medlemsID;
+        this.kontingent = kontingent;
     }
 
     public String getName() {
@@ -48,8 +43,8 @@ public abstract class Members {
         return svommeHold;
     }
 
-    public double getKontigent() {
-        return kontigent;
+    public double getKontingent() {
+        return kontingent;
     }
 
 abstract public double kontigentBeregner();
@@ -57,14 +52,13 @@ abstract public double kontigentBeregner();
     @Override
     public String toString() {
         return "Members{" +
-                "medlemsID=" + medlemsID +
                 ", name='" + name + '\'' +
                 ", email='" + email + '\'' +
                 ", tlfNr=" + tlfNr +
                 ", fodselsdag='" + fodselsdag + '\'' +
                 ", favSvommeArt='" + favSvommeArt + '\'' +
                 ", svommeHold='" + svommeHold + '\'' +
-                ", kontigent=" + kontigent +
+                ", kontigent=" + kontingent +
                 '}';
     }
 }
