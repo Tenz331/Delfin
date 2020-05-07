@@ -8,9 +8,9 @@ public abstract class Members {
     String fodselsdag;
     String favSvommeArt;
     String svommeHold;
-    double kontigent;
+    double kontingent;
 
-    public Members(int medlemsID, String name, String email, int tlfNr, String fodselsdag, String favSvommeArt, String svommeHold, double kontigent) {
+    public Members(int medlemsID, String name, String email, int tlfNr, String fodselsdag, String favSvommeArt, String svommeHold, double kontingent) {
         this.medlemsID = medlemsID;
         this.name = name;
         this.email = email;
@@ -18,7 +18,7 @@ public abstract class Members {
         this.fodselsdag = fodselsdag;
         this.favSvommeArt = favSvommeArt;
         this.svommeHold = svommeHold;
-        this.kontigent = kontigent;
+        this.kontingent = kontingent;
     }
     public int getMedlemsID() {
         return medlemsID;
@@ -49,7 +49,7 @@ public abstract class Members {
     }
 
     public double getKontigent() {
-        return kontigent;
+        return kontingent;
     }
 
 abstract public double kontigentBeregner();
@@ -64,7 +64,7 @@ abstract public double kontigentBeregner();
                 ", fodselsdag='" + fodselsdag + '\'' +
                 ", favSvommeArt='" + favSvommeArt + '\'' +
                 ", svommeHold='" + svommeHold + '\'' +
-                ", kontigent=" + kontigent +
+                ", kontigent=" + kontingent +
                 '}';
     }
 }
