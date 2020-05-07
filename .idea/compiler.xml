@@ -9,8 +9,8 @@
         <module name="Delfin" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel>
-      <module name="Delfin" target="1.8" />
+    <bytecodeTargetLevel target="11">
+      <module name="Delfin" target="11" />
     </bytecodeTargetLevel>
   </component>
 </project>
