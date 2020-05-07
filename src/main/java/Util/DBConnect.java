@@ -1,5 +1,7 @@
 package Util;
 
+import View.MainView;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -10,12 +12,12 @@ public class DBConnect {
 
     private DBConnect() {
         try {
-            String baseurl = "jdbc:mysql://cphb-gruppe1.c4mqzn3xlkdy.us-east-2.rds.amazonaws.com/"; //url
-            String db = "Delfinen";//database
+            String baseurl = "jdbc:mysql://cphb-gruppe1.c4mqzn3xlkdy.us-east-2.rds.amazonaws.com/"; //url or ip
+            String db = "Delfinen"; //database
             String timeZ = "serverTimezone=UTC&allowPublicKeyRetrieval=true"; //noget fra thor idk wwhat it really does
             String totalUrl = baseurl + db + "?" + timeZ; //sætter linked sammen med 'timeZ'
-            String user = "fullroot"; //username
-            String password = "fullroot"; //password
+            String user = MainView.dBUser;
+            String password = MainView.dBPassword;
             connection = DriverManager.getConnection(totalUrl, user, password);//opretter forbindelse
         } catch (SQLException id) {
             System.out.println("Error: " + id.getMessage());//fejl msg
@@ -40,7 +42,7 @@ public class DBConnect {
             String totalUrl = baseurl + db + "?" + timeZ; //sætter linked sammen med 'timeZ'
             connection = DriverManager.getConnection(totalUrl, user, password);
             System.out.println("login succesfull");
-            System.out.println("Welcome: '"+user+"'\n");
+            System.out.println("Welcome: '" + user + "'\n");
             connection.close();
 
         } catch (SQLException e) {
@@ -54,4 +56,5 @@ public class DBConnect {
     public Connection getConnection() {
         return this.connection;
     }
+
 }
