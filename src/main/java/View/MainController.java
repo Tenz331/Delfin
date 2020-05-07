@@ -2,7 +2,6 @@ package View;
 
 import Util.DBConnect;
 
-import java.sql.SQLException;
 import java.util.Scanner;
 
 public class MainController { //Vores main controller og Main Menu
@@ -40,16 +39,16 @@ Scanner userInput = new Scanner(System.in);
         initalizeSQLDB();
         switch (user){
             case "fullroot":
-                FormandController formand = new FormandController();
+                FormandUI formand = new FormandUI();
                 formand.printMenu();
                 break;
             case "traener":
-                TrænerController trænerController = new TrænerController();
-                trænerController.printMenu();
+                TrænerUI trænerUI = new TrænerUI();
+                trænerUI.printMenu();
                 break;
             case "kasser":
-                KasserController kasserController = new KasserController();
-                kasserController.printMenu();
+                KasserUI kasserUI = new KasserUI();
+                kasserUI.printMenu();
             default:
                 System.out.println("error in user"+ user);
                 break;
