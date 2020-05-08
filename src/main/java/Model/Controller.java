@@ -6,12 +6,11 @@ import Datamapper.MemberWrite;
 import java.time.LocalDate;
 import java.util.Scanner;
 
-public class controller {
+public class Controller {
     Teams teams = new Teams();
     Scanner scanner = new Scanner(System.in);
     String tempNavn, tempEmail, tempFavSvommeArt, tempSvommeHold;
     int age, tempTlfNr, tempInput;
-    double tempKontigent;
     LocalDate birthDate;
     MemberWrite memberWrite = new MemberWrite();
 

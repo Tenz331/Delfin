@@ -1,27 +1,27 @@
 package View;
 
-import Model.controller;
+import Model.Controller;
 
 import java.util.Scanner;
 
 public class FormandUI {
 
     public void printMenu() {
-        controller controller = new controller();
+        Controller controller = new Controller();
         Scanner scanner = new Scanner(System.in);
         System.out.println("Logged in som: Formand\n");
         System.out.println("Formand Menu:\n");
         String PrintMainMenuText =
                 " Skriv: [1] Tilmeld medlem. \n" +
                         " Skriv: [2] Rediger medlem. \n" +
-                        " Skriv: [3] Slet medlem \n" +
-                        " Skriv: [4] Register best time.\n " +
-                        " Skriv: [5] Se restance \n" +
+                        " Skriv: [3] Slet medlem. \n" +
+                        " Skriv: [4] Register best time.\n" +
+                        " Skriv: [5] Se restance. \n" +
                         " Skriv: [6] Se kontingenter. \n" +
                         " Skriv: [7] Ændre kontigenter. \n" +
                         " Skriv: [8] Top 5 Juinior. \n " +
                         "Skriv: [9] Top 5 Senior. \n " +
-                        "Skriv: [10] Logout.\n " +
+                        "Skriv: [10] exit.\n " +
                         "\nInput:";
         System.out.println(PrintMainMenuText);
         int input = Integer.parseInt(scanner.nextLine());

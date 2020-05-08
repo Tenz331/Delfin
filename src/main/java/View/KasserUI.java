@@ -1,11 +1,11 @@
 package View;
 
-import Model.controller;
+import Model.Controller;
 
 import java.util.Scanner;
 
 public class KasserUI {
-    Model.controller controller = new controller();
+    Controller controller = new Controller();
 
     public void printMenu() {
         Scanner scanner = new Scanner(System.in);
@@ -14,7 +14,7 @@ public class KasserUI {
         String PrintMainMenuText = " Skriv: [1] Se restance \n" +
                         " Skriv: [2] Se kontingenter. \n" +
                         " Skriv: [3] Ændre kontigenter. \n" +
-                        "Skriv: [4] Logout.\n " +
+                        "Skriv: [4] exit.\n " +
                         "\nInput:";
         System.out.println(PrintMainMenuText);
         int input = Integer.parseInt(scanner.nextLine());

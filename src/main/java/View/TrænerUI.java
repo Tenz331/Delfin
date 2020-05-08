@@ -10,7 +10,7 @@ public class TrænerUI {
         String PrintMainMenuText = " Skriv: [1] Top 5 Juinior. \n" +
                 " Skriv: [2] Top 5 Senior. \n" +
                 " Skriv: [3] Register best time.\n " +
-                " Skriv: [4] Logout.\n " +
+                " Skriv: [4] exit.\n " +
                 "\nInput:";
         System.out.println(PrintMainMenuText);
         int input = Integer.parseInt(scanner.nextLine());
