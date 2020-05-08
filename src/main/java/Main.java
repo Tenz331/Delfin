@@ -1,3 +1,4 @@
+import Util.DBConnect;
 import View.MainView;
 import java.sql.SQLException;
 
@@ -7,5 +8,6 @@ public class Main {
         //Starting MainController og vores MainMenu
         MainView mainmenu = new MainView(); // Instanciere main controller
         mainmenu.getUser(); // åbner main menu / main controller
+
     }
 }

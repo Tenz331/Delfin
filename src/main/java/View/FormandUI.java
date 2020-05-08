@@ -58,8 +58,8 @@ public class FormandUI {
                 printMenu();
                 break;
             case 9:
-                Logout();
-                printMenu();
+                System.out.println("Goodbye");
+                System.exit(0);
                 break;
             default:
                 System.out.println("Error in input: '" + input + "'");
@@ -68,7 +68,4 @@ public class FormandUI {
         System.out.println(PrintMainMenuText); //printer vores MainMenu
     }
 
-    private void Logout() {
-
-    }
 }

@@ -1,5 +1,6 @@
 package Util;
 
+import Model.Controller;
 import View.MainView;
 
 import java.sql.Connection;
@@ -31,6 +32,7 @@ public class DBConnect {
         }
         return instance;
     }
+
 
     public static String Login(String user, String password) throws SQLException {
         try {

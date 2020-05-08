@@ -1,5 +1,7 @@
 package View;
+
 import Util.DBConnect;
+
 import java.util.Scanner;
 
 public class MainView { //Vores main controller og Main Menu
@@ -8,7 +10,7 @@ public class MainView { //Vores main controller og Main Menu
     boolean sqlCheck = true; //boolean der bruges til: at søre for hvergang programmet retunere til vores main controller så  den ikke køre vores SQL check og update. Altså vi kan kontrolelre hvornår det skal ske 'initalizeSQLDB'
     Scanner userInput = new Scanner(System.in);
 
-    public void initalizeSQLDB() {
+    public void LoginSQLDB() {
         if (sqlCheck == true) { // check for at gøre at koden kun bliver kørt en gang per start.
             try {
                 sqlCheck = false;
@@ -23,7 +25,8 @@ public class MainView { //Vores main controller og Main Menu
                 DBConnect.getInstance();
             } catch (Exception e) {
                 System.out.println("MYSQL ERROR! :" + e);
-                dBUser = ""; dBPassword = "";
+                dBUser = "";
+                dBPassword = "";
                 sqlCheck = true;
             }
 
@@ -34,13 +37,13 @@ public class MainView { //Vores main controller og Main Menu
     }
 
     public void getUser() {
-        initalizeSQLDB();
+        LoginSQLDB();
         switch (dBUser) {
             case "fullroot":
                 FormandUI formand = new FormandUI();
                 formand.printMenu();
                 break;
-            case "traener":
+            case "træner":
                 TrænerUI trænerUI = new TrænerUI();
                 trænerUI.printMenu();
                 break;
