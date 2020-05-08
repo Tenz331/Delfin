@@ -3,12 +3,11 @@ package Model;
 
 import Datamapper.MemberWrite;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.Scanner;
 
 public class controller {
+    Teams teams = new Teams();
     Scanner scanner = new Scanner(System.in);
     String tempNavn, tempEmail, tempFavSvommeArt, tempSvommeHold;
     int age, tempTlfNr, tempInput;
@@ -65,18 +64,21 @@ public class controller {
         if (age <=18){
             tempSvommeHold = "Junior";
             JuniorMedlem newJunior = new JuniorMedlem(tempNavn,tempEmail,tempTlfNr,birthDate,tempFavSvommeArt,tempSvommeHold);
+            teams.addJuniorTeam(newJunior);
             memberWrite.setMember(newJunior);
 
         }
         else if(age <=59){
             tempSvommeHold = "Senior";
             SeniorMedlem newSenior = new SeniorMedlem(tempNavn,tempEmail,tempTlfNr,birthDate,tempFavSvommeArt,tempSvommeHold);
+            teams.addSeniorTeam(newSenior);
             memberWrite.setMember(newSenior);
 
         }
         else {
             tempSvommeHold = "Pensonist";
             PensionistMedlem  newPensionist = new PensionistMedlem(tempNavn,tempEmail,tempTlfNr,birthDate,tempFavSvommeArt,tempSvommeHold);
+            teams.addPensionTeam(newPensionist);
             memberWrite.setMember(newPensionist);
         }
 
