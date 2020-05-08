@@ -1,22 +1,24 @@
 package Model;
 
+import java.time.LocalDate;
+import java.util.Date;
+
 public abstract class Members {
     String name;
     String email;
     int tlfNr;
-    String fodselsdag;
+    LocalDate fodselsdag;
     String favSvommeArt;
     String svommeHold;
     double kontingent;
 
-    public Members( String name, String email, int tlfNr, String fodselsdag, String favSvommeArt, String svommeHold, double kontingent) {
+    public Members( String name, String email, int tlfNr, LocalDate fodselsdag, String favSvommeArt, String svommeHold) {
         this.name = name;
         this.email = email;
         this.tlfNr = tlfNr;
         this.fodselsdag = fodselsdag;
         this.favSvommeArt = favSvommeArt;
         this.svommeHold = svommeHold;
-        this.kontingent = kontingent;
     }
 
     public String getName() {
@@ -31,7 +33,8 @@ public abstract class Members {
         return tlfNr;
     }
 
-    public String getFodselsdag() {
+    public LocalDate getFodselsdag() {
+
         return fodselsdag;
     }
 
@@ -47,7 +50,7 @@ public abstract class Members {
         return kontingent;
     }
 
-abstract public double kontigentBeregner();
+    abstract public double kontigentBeregner();
 
     @Override
     public String toString() {

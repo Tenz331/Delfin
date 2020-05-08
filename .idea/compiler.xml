@@ -10,7 +10,7 @@
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="Delfin" target="7" />
+      <module name="Delfin" target="8" />
     </bytecodeTargetLevel>
   </component>
 </project>

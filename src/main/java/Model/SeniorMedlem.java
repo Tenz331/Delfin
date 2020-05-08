@@ -1,9 +1,12 @@
 package Model;
 
+import java.time.LocalDate;
+import java.util.Date;
+
 public class SeniorMedlem extends Members {
 
-    public SeniorMedlem( String name, String email, int tlfNr, String fodselsdag, String favSvommeArt, String svommeHold, double kontingent) {
-        super( name, email, tlfNr, fodselsdag, favSvommeArt, svommeHold, kontingent);
+    public SeniorMedlem(String name, String email, int tlfNr, LocalDate fodselsdag, String favSvommeArt, String svommeHold) {
+        super( name, email, tlfNr, fodselsdag, favSvommeArt, svommeHold);
     }
 
     @Override
@@ -18,7 +21,7 @@ public class SeniorMedlem extends Members {
             kontingent = 1600;
             return kontingent;
         }
-        if (svommeHold  == "pensionist") {
+        if (svommeHold  == "Pensonist") {
             kontingent = 1600*75/100;
             return kontingent;
         }

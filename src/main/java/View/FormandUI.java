@@ -1,11 +1,13 @@
 package View;
 
-import Model.Controller;
+import Model.controller;
 
 import java.util.Scanner;
 
 public class FormandUI {
+
     public void printMenu() {
+        controller controller = new controller();
         Scanner scanner = new Scanner(System.in);
         System.out.println("Logged in som: Formand\n");
         System.out.println("Formand Menu:\n");
@@ -24,37 +26,37 @@ public class FormandUI {
         int input = Integer.parseInt(scanner.nextLine());
         switch (input) {
             case 1:
-                Controller.addMember();
+                controller.addMember();
                 printMenu();
                 break;
             case 2:
-                Controller.editMember();
+                controller.editMember();
                 printMenu();
 
                 break;
             case 3:
-                Controller.deleteMember();
+                controller.deleteMember();
                 printMenu();
 
                 break;
             case 4:
-                Controller.seeRestance();
+                controller.seeRestance();
                 printMenu();
                 break;
             case 5:
-                Controller.seeKontigenter();
+                controller.seeKontigenter();
                 printMenu();
                 break;
             case 6:
-                Controller.editKontigenter();
+                controller.editKontigenter();
                 printMenu();
                 break;
             case 7:
-                Controller.top5Junior();
+                controller.top5Junior();
                 printMenu();
                 break;
             case 8:
-                Controller.top5Senior();
+                controller.top5Senior();
                 printMenu();
                 break;
             case 9:
