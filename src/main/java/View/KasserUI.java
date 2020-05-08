@@ -1,8 +1,12 @@
 package View;
 
+import Model.controller;
+
 import java.util.Scanner;
 
 public class KasserUI {
+    Model.controller controller = new controller();
+
     public void printMenu() {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Logged in som: Kassêr\n");
@@ -16,11 +20,11 @@ public class KasserUI {
         int input = Integer.parseInt(scanner.nextLine());
         switch (input) {
             case 1:
-
+                controller.seeRestance();
                 printMenu();
                 break;
             case 2:
-
+                controller.editKontigenter();
                 printMenu();
 
                 break;
