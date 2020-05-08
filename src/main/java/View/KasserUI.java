@@ -1,5 +1,7 @@
 package View;
 
+import Model.Controller;
+
 import java.util.Scanner;
 
 public class KasserUI {
@@ -16,11 +18,11 @@ public class KasserUI {
         int input = Integer.parseInt(scanner.nextLine());
         switch (input) {
             case 1:
-
+                Controller.seeRestance();
                 printMenu();
                 break;
             case 2:
-
+                Controller.editKontigenter();
                 printMenu();
 
                 break;

@@ -1,5 +1,7 @@
 package View;
 
+import Model.Controller;
+
 import java.util.Scanner;
 
 public class FormandUI {
@@ -17,53 +19,53 @@ public class FormandUI {
                         " Skriv: [7] Top 5 Juinior. \n " +
                         "Skriv: [8] Top 5 Senior. \n " +
                         "Skriv: [9] Logout.\n " +
-                        "Skriv: [404] FOR DEV OPTIONS" +
                         "\nInput:";
         System.out.println(PrintMainMenuText);
         int input = Integer.parseInt(scanner.nextLine());
         switch (input) {
             case 1:
-
+                Controller.addMember();
                 printMenu();
                 break;
             case 2:
-
+                Controller.editMember();
                 printMenu();
 
                 break;
             case 3:
-
+                Controller.deleteMember();
                 printMenu();
 
                 break;
             case 4:
-
+                Controller.seeRestance();
                 printMenu();
                 break;
             case 5:
-
+                Controller.seeKontigenter();
                 printMenu();
                 break;
             case 6:
-
+                Controller.editKontigenter();
                 printMenu();
                 break;
             case 7:
-
+                Controller.top5Junior();
                 printMenu();
                 break;
             case 8:
-
+                Controller.top5Senior();
                 printMenu();
                 break;
             case 9:
-
-                printMenu();
+                System.out.println("Goodbye");
+                System.exit(0);
                 break;
             default:
-                System.out.println("Error in input: '"+ input+"'");
+                System.out.println("Error in input: '" + input + "'");
                 printMenu();
         }
         System.out.println(PrintMainMenuText); //printer vores MainMenu
     }
+
 }
