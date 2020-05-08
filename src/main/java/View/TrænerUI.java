@@ -9,7 +9,8 @@ public class TrænerUI {
         System.out.println("Træner Menu:\n");
         String PrintMainMenuText = " Skriv: [1] Top 5 Juinior. \n" +
                 " Skriv: [2] Top 5 Senior. \n" +
-                " Skriv: [3] Logout.\n " +
+                " Skriv: [3] Register best time.\n " +
+                " Skriv: [4] Logout.\n " +
                 "\nInput:";
         System.out.println(PrintMainMenuText);
         int input = Integer.parseInt(scanner.nextLine());
@@ -27,6 +28,8 @@ public class TrænerUI {
 
                 printMenu();
 
+                break;
+            case 4:
                 break;
             default:
 

@@ -15,12 +15,13 @@ public class FormandUI {
                 " Skriv: [1] Tilmeld medlem. \n" +
                         " Skriv: [2] Rediger medlem. \n" +
                         " Skriv: [3] Slet medlem \n" +
-                        " Skriv: [4] Se restance \n" +
-                        " Skriv: [5] Se kontingenter. \n" +
-                        " Skriv: [6] Ændre kontigenter. \n" +
-                        " Skriv: [7] Top 5 Juinior. \n " +
-                        "Skriv: [8] Top 5 Senior. \n " +
-                        "Skriv: [9] Logout.\n " +
+                        " Skriv: [4] Register best time.\n " +
+                        " Skriv: [5] Se restance \n" +
+                        " Skriv: [6] Se kontingenter. \n" +
+                        " Skriv: [7] Ændre kontigenter. \n" +
+                        " Skriv: [8] Top 5 Juinior. \n " +
+                        "Skriv: [9] Top 5 Senior. \n " +
+                        "Skriv: [10] Logout.\n " +
                         "\nInput:";
         System.out.println(PrintMainMenuText);
         int input = Integer.parseInt(scanner.nextLine());
@@ -40,26 +41,25 @@ public class FormandUI {
 
                 break;
             case 4:
-                controller.seeRestance();
                 printMenu();
                 break;
             case 5:
-                controller.seeKontigenter();
                 printMenu();
                 break;
             case 6:
-                controller.editKontigenter();
                 printMenu();
                 break;
             case 7:
-                controller.top5Junior();
                 printMenu();
                 break;
             case 8:
-                controller.top5Senior();
                 printMenu();
                 break;
             case 9:
+                System.out.println("Goodbye");
+                System.exit(0);
+                break;
+            case 10:
                 System.out.println("Goodbye");
                 System.exit(0);
                 break;
