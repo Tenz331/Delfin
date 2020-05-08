@@ -21,7 +21,7 @@ public class PensionistMedlem extends Members {
             kontingent = 1600;
             return kontingent;
         }
-        if (svommeHold  == "pensionist") {
+        if (svommeHold  == "Pensonist") {
             kontingent = 1600*75/100;
             return kontingent;
         }
