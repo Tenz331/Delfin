@@ -4,8 +4,8 @@ import java.time.LocalDate;
 
 public class JuniorMedlem extends Members {
 
-    public JuniorMedlem(String name, String email, int tlfNr, LocalDate fodselsdag, String favSvommeArt, String svommeHold) {
-        super(name, email, tlfNr, fodselsdag, favSvommeArt, svommeHold);
+    public JuniorMedlem(int unicID,String name, String email, int tlfNr, LocalDate fodselsdag, String favSvommeArt, String svommeHold) {
+        super(unicID,name, email, tlfNr, fodselsdag, favSvommeArt, svommeHold);
     }
 
     @Override
