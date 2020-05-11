@@ -5,8 +5,8 @@ import java.util.Date;
 
 public class SeniorMedlem extends Members {
 
-    public SeniorMedlem(String name, String email, int tlfNr, LocalDate fodselsdag, String favSvommeArt, String svommeHold) {
-        super( name, email, tlfNr, fodselsdag, favSvommeArt, svommeHold);
+    public SeniorMedlem(int unicID, String name, String email, int tlfNr, LocalDate fodselsdag, String favSvommeArt, String svommeHold) {
+        super(unicID, name, email, tlfNr, fodselsdag, favSvommeArt, svommeHold);
     }
 
     @Override

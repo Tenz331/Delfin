@@ -10,7 +10,7 @@ public class LoginView { //Vores main controller og Main Menu
     boolean sqlCheck = true; //boolean der bruges til: at søre for hvergang programmet retunere til vores main controller så  den ikke køre vores SQL check og update. Altså vi kan kontrolelre hvornår det skal ske 'initalizeSQLDB'
     Scanner userInput = new Scanner(System.in);
 
-    public void LoginSQLDB() {
+    public void loginSQLDB() {
         if (sqlCheck == true) { // check for at gøre at koden kun bliver kørt en gang per start.
             try {
                 String loGo =
@@ -54,7 +54,8 @@ public class LoginView { //Vores main controller og Main Menu
     }
 
     public void getUser() {
-        LoginSQLDB();
+        loginSQLDB();
+        populateMembers();
         switch (dBUser.toLowerCase()) {
             case "formand":
                 FormandUI formand = new FormandUI();
@@ -69,9 +70,13 @@ public class LoginView { //Vores main controller og Main Menu
                 kasserUI.printMenu();
             default:
                 sqlCheck = true;
-                LoginSQLDB();
+                loginSQLDB();
                 break;
 
         }
+    }
+
+    private void populateMembers() {
+
     }
 }

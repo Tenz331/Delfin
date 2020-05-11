@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.util.Date;
 
 public abstract class Members {
+    int unicID;
     String name;
     String email;
     int tlfNr;
@@ -12,13 +13,22 @@ public abstract class Members {
     String svommeHold;
     double kontingent;
 
-    public Members( String name, String email, int tlfNr, LocalDate fodselsdag, String favSvommeArt, String svommeHold) {
+    public Members(int unicID, String name, String email, int tlfNr, LocalDate fodselsdag, String favSvommeArt, String svommeHold) {
+        this.unicID = unicID;
         this.name = name;
         this.email = email;
         this.tlfNr = tlfNr;
         this.fodselsdag = fodselsdag;
         this.favSvommeArt = favSvommeArt;
         this.svommeHold = svommeHold;
+    }
+
+    public int getUnicID() {
+        return unicID;
+    }
+
+    public void setUnicID(int unicID) {
+        this.unicID = unicID;
     }
 
     public String getName() {

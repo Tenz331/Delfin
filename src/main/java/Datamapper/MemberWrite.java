@@ -20,7 +20,7 @@ public class MemberWrite {
             tempmembers.add(members);
             for (Members i : tempmembers) {
                 System.out.println(i.getName().toString());
-                String query = "INSERT INTO Delfinen.Membership (member_name, member_email, member_telefon, member_fødselsdag, member_favSvømmeart, member_hold, member_kontingent)" + "values(?,?,?,?,?,?,?)";
+                String query = "INSERT INTO Delfinen.Membership (member_name, member_email, member_telefon, member_fødselsdag, member_favSvømmeart, member_hold, member_kontingent, member_idd )" + "values(?,?,?,?,?,?,?,?)";
                 PreparedStatement preparedStatement = connection.prepareStatement(query);
                 preparedStatement.setString(1, i.getName());
                 preparedStatement.setString(2, i.getEmail());
@@ -29,6 +29,7 @@ public class MemberWrite {
                 preparedStatement.setString(5, i.getFavSvommeArt());
                 preparedStatement.setString(6, i.getSvommeHold());
                 preparedStatement.setDouble(7, i.kontigentBeregner());
+                preparedStatement.setInt(8,i.getUnicID());
                 preparedStatement.execute();
             }
         } catch (SQLException e) {
