@@ -5,9 +5,7 @@ public class MemberRead {
 
     Connection connection = DBConnect.getInstance().getConnection();
 
-    public void getMember(){
 
-    }
 
     public void getDisciplin(){
 

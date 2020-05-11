@@ -7,6 +7,7 @@ import java.time.LocalDate;
 import java.util.Scanner;
 
 public class Controller {
+    static int uId = 0;
     Teams teams = new Teams();
     Scanner scanner = new Scanner(System.in);
     String tempNavn, tempEmail, tempFavSvommeArt, tempSvommeHold;
@@ -15,9 +16,8 @@ public class Controller {
     MemberWrite memberWrite = new MemberWrite();
 
     public void addMember() {
+       uId = generateUnicId();
         System.out.println(LocalDate.now());
-
-
         System.out.println("Tilføj et nyt medlem:\n");
         System.out.println("Meldem navn:\n");
         tempNavn = scanner.nextLine();
@@ -56,32 +56,36 @@ public class Controller {
 
     }
 
+    private int generateUnicId() {
+        uId++;
+        return uId;
+    }
 
 
     private void setTeam(int age) {
         System.out.println(age);
         if (age <=18){
             tempSvommeHold = "Junior";
-            JuniorMedlem newJunior = new JuniorMedlem(tempNavn,tempEmail,tempTlfNr,birthDate,tempFavSvommeArt,tempSvommeHold);
+            JuniorMedlem newJunior = new JuniorMedlem(uId,tempNavn,tempEmail,tempTlfNr,birthDate,tempFavSvommeArt,tempSvommeHold);
             teams.addNewMember(newJunior);
             memberWrite.setMember(newJunior);
 
         }
         else if(age <=59){
             tempSvommeHold = "Senior";
-            SeniorMedlem newSenior = new SeniorMedlem(tempNavn,tempEmail,tempTlfNr,birthDate,tempFavSvommeArt,tempSvommeHold);
+            SeniorMedlem newSenior = new SeniorMedlem(uId,tempNavn,tempEmail,tempTlfNr,birthDate,tempFavSvommeArt,tempSvommeHold);
             teams.addNewMember(newSenior);
             memberWrite.setMember(newSenior);
 
         }
         else {
             tempSvommeHold = "Pensonist";
-            PensionistMedlem  newPensionist = new PensionistMedlem(tempNavn,tempEmail,tempTlfNr,birthDate,tempFavSvommeArt,tempSvommeHold);
+            PensionistMedlem  newPensionist = new PensionistMedlem(uId,tempNavn,tempEmail,tempTlfNr,birthDate,tempFavSvommeArt,tempSvommeHold);
             teams.addNewMember(newPensionist);
             memberWrite.setMember(newPensionist);
         }
 
-        System.out.println("ny "+ tempSvommeHold+ " tilføjet:\nNavn: "+tempNavn + ", Email: "+ tempEmail +", TLF: "+ tempTlfNr +", fødselsdag: "+ birthDate + ", Svømme art: "+ tempFavSvommeArt + ", Hold: "+ tempSvommeHold);
+        System.out.println("ny "+ tempSvommeHold+ " "+"UID#"+uId+" Navn:"+tempNavn + ", Email: "+ tempEmail +", TLF: "+ tempTlfNr +", fødselsdag: "+ birthDate + ", Svømme art: "+ tempFavSvommeArt + ", Hold: "+ tempSvommeHold);
 
 
     }
@@ -102,6 +106,9 @@ public class Controller {
     }
 
     public void deleteMember() {
+        String name;
+        name = scanner.nextLine();
+        teams.removeMember(name);
     }
 
     public void editMember() {
