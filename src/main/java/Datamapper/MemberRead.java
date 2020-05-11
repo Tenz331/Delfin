@@ -17,6 +17,7 @@ public class MemberRead {
     Connection connection = DBConnect.getInstance().getConnection();
     int tempcounter = 0;
 
+
     Map<Integer, Members> tempMembers = new HashMap<>();
 
     public Map<Integer, Members> getMember() {
