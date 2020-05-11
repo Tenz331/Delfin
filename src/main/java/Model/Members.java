@@ -12,13 +12,14 @@ public abstract class Members {
     String svommeHold;
     double kontingent;
 
-    public Members( String name, String email, int tlfNr, LocalDate fodselsdag, String favSvommeArt, String svommeHold) {
+    public Members( String name, String email, int tlfNr, LocalDate fodselsdag, String favSvommeArt, String svommeHold, double kontingent) {
         this.name = name;
         this.email = email;
         this.tlfNr = tlfNr;
         this.fodselsdag = fodselsdag;
         this.favSvommeArt = favSvommeArt;
         this.svommeHold = svommeHold;
+        this.kontingent = kontingent;
     }
 
     public String getName() {
@@ -46,9 +47,7 @@ public abstract class Members {
         return svommeHold;
     }
 
-    public double getKontingent() {
-        return kontingent;
-    }
+    public double getKontingent() { return kontingent;}
 
     abstract public double kontigentBeregner();
 
