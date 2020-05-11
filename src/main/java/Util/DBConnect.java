@@ -1,6 +1,6 @@
 package Util;
 
-import View.MainView;
+import View.LoginView;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -16,8 +16,8 @@ public class DBConnect {
             String db = "Delfinen"; //database
             String timeZ = "serverTimezone=UTC&allowPublicKeyRetrieval=true"; //noget fra thor idk wwhat it really does
             String totalUrl = baseurl + db + "?" + timeZ; //sætter linked sammen med 'timeZ'
-            String user = MainView.dBUser;
-            String password = MainView.dBPassword;
+            String user = LoginView.dBUser;
+            String password = LoginView.dBPassword;
             connection = DriverManager.getConnection(totalUrl, user, password);//opretter forbindelse
         } catch (SQLException id) {
             System.out.println("Error: " + id.getMessage());//fejl msg
@@ -47,7 +47,7 @@ public class DBConnect {
             connection.close();
 
         } catch (SQLException e) {
-            System.out.println("LOGIN ERROR! ");
+            System.out.println("LOGIN ERROR!");
             System.out.println(e);
             return "ERROR";
         }
