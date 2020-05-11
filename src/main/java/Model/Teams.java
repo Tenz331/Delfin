@@ -1,21 +1,17 @@
 package Model;
-
-import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Teams {
-    public static ArrayList<JuniorMedlem> juniorTeam = new ArrayList<>();
-    public static ArrayList<SeniorMedlem> seniorTeam = new ArrayList<>();
-    public static ArrayList<PensionistMedlem> pensionTeam = new ArrayList<>();
+    static int counter = 0;
+    Map<Integer, Members> teams = new HashMap<>();
 
-    public void addJuniorTeam(JuniorMedlem team) {
-        juniorTeam.add(team);
+    public void addNewMember(Members team ) {
+        counter++;
+        teams.put(counter,team);
+    }
+    public void removeMember(int id){
+        teams.remove(id);
     }
 
-    public void addSeniorTeam(SeniorMedlem team) {
-        seniorTeam.add(team);
-    }
-
-    public void addPensionTeam(PensionistMedlem team) {
-        pensionTeam.add(team);
-    }
 }
