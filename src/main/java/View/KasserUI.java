@@ -2,12 +2,16 @@ package View;
 
 import Model.Controller;
 
+import java.sql.SQLException;
 import java.util.Scanner;
 
 public class KasserUI {
     Controller controller = new Controller();
-
-    public void printMenu() {
+    public void populateMember(){
+        controller.setMember();
+    }
+    public void printMenu() throws SQLException {
+        populateMember();
         Scanner scanner = new Scanner(System.in);
         System.out.println("Logged in som: Kassêr\n");
         System.out.println("Kassêr Menu:\n");

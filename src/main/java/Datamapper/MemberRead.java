@@ -11,18 +11,15 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class MemberRead {
-    Connection connection = DBConnect.getInstance().getConnection();
     static int tempcounter = 0;
-    private static final String USERNAME = "fullroot";
-    private static final String PASSWORD = "fullroot";
-    private static final String CONN_STR = "jdbc:mysql://cphb-gruppe1.c4mqzn3xlkdy.us-east-2.rds.amazonaws.com/";
+    Connection conn = DBConnect.getInstance().getConnection();
 
     Map<Integer, Members> tempMembers;
 
     public Map<Integer, Members> getMember() {
         tempMembers = new HashMap<>();
         try (
-                Connection conn = DriverManager.getConnection(CONN_STR, USERNAME, PASSWORD);
+
                 Statement stmt = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
                 ResultSet rs = ((Statement) stmt).executeQuery("SELECT * FROM Delfinen.Membership")
         ) {
@@ -33,16 +30,15 @@ public class MemberRead {
                 if (teamType.equals("Junior")) {
                     //StringBuffer buffer = new StringBuffer();
                     //buffer.append(rs.getInt("member_idd"), rs.getString("member_name"), rs.getString("member_email"), rs.getInt("member_telefon"), rs.getDate("member_fodselsdag").toLocalDate(), rs.getString("member_favSvommeArt"), rs.getString("member_svommeHold"));
-                    JuniorMedlem temp = new JuniorMedlem(rs.getInt("member_idd"), rs.getString("member_name"), rs.getString("member_email"), rs.getInt("member_telefon"), rs.getDate("member_fødselsdag").toLocalDate(), rs.getString("member_favSvømmeArt"), rs.getString("member_hold"),rs.getDouble("member_kontingent"));
+                    JuniorMedlem temp = new JuniorMedlem(rs.getInt("member_idd"), rs.getString("member_name"), rs.getString("member_email"), rs.getInt("member_telefon"), rs.getDate("member_fødselsdag").toLocalDate(), rs.getString("member_favSvømmeArt"), rs.getString("member_hold"), rs.getDouble("member_kontingent"), rs.getBoolean("betalt_kontigent"));
                     tempMembers.put(tempcounter, temp);
 
                 } else if (teamType.equals("Senior")) {
-                    SeniorMedlem temp = new SeniorMedlem(rs.getInt("member_idd"), rs.getString("member_name"), rs.getString("member_email"), rs.getInt("member_telefon"), rs.getDate("member_fødselsdag").toLocalDate(), rs.getString("member_favSvømmeArt"), rs.getString("member_hold"),rs.getDouble("member_kontingent"));
-                    System.out.println(temp.toString());
+                    SeniorMedlem temp = new SeniorMedlem(rs.getInt("member_idd"), rs.getString("member_name"), rs.getString("member_email"), rs.getInt("member_telefon"), rs.getDate("member_fødselsdag").toLocalDate(), rs.getString("member_favSvømmeArt"), rs.getString("member_hold"), rs.getDouble("member_kontingent"), rs.getBoolean("betalt_kontigent"));
                     tempMembers.put(tempcounter, temp);
 
                 } else {
-                    PensionistMedlem temp = new PensionistMedlem(rs.getInt("member_idd"), rs.getString("member_name"), rs.getString("member_email"), rs.getInt("member_telefon"), rs.getDate("member_fødselsdag").toLocalDate(), rs.getString("member_favSvømmeArt"), rs.getString("member_hold"),rs.getDouble("member_kontingent"));
+                    PensionistMedlem temp = new PensionistMedlem(rs.getInt("member_idd"), rs.getString("member_name"), rs.getString("member_email"), rs.getInt("member_telefon"), rs.getDate("member_fødselsdag").toLocalDate(), rs.getString("member_favSvømmeArt"), rs.getString("member_hold"), rs.getDouble("member_kontingent"), rs.getBoolean("betalt_kontigent"));
                     tempMembers.put(tempcounter, temp);
 
                 }
@@ -63,5 +59,36 @@ public class MemberRead {
 
     }
 
+    public Map<Integer, Members> checkRestance()  {
+        tempMembers = new HashMap<>();
+        try (
+                Statement stmt = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+                ResultSet rs = ((Statement) stmt).executeQuery("SELECT * FROM Delfinen.Membership WHERE betalt_kontigent = '0' ")
+        ) {
+            while (rs.next()) {
+                String teamType = rs.getString("member_hold");
+                tempcounter++;
+                if (teamType.equals("Junior")) {
+                    JuniorMedlem temp = new JuniorMedlem(rs.getInt("member_idd"), rs.getString("member_name"), rs.getString("member_email"), rs.getInt("member_telefon"), rs.getDate("member_fødselsdag").toLocalDate(), rs.getString("member_favSvømmeArt"), rs.getString("member_hold"), rs.getDouble("member_kontingent"), rs.getBoolean("betalt_kontigent"));
+                    tempMembers.put(tempcounter, temp);
 
+                } else if (teamType.equals("Senior")) {
+                    SeniorMedlem temp = new SeniorMedlem(rs.getInt("member_idd"), rs.getString("member_name"), rs.getString("member_email"), rs.getInt("member_telefon"), rs.getDate("member_fødselsdag").toLocalDate(), rs.getString("member_favSvømmeArt"), rs.getString("member_hold"), rs.getDouble("member_kontingent"), rs.getBoolean("betalt_kontigent"));
+                    tempMembers.put(tempcounter, temp);
+
+                } else {
+                    PensionistMedlem temp = new PensionistMedlem(rs.getInt("member_idd"), rs.getString("member_name"), rs.getString("member_email"), rs.getInt("member_telefon"), rs.getDate("member_fødselsdag").toLocalDate(), rs.getString("member_favSvømmeArt"), rs.getString("member_hold"), rs.getDouble("member_kontingent"), rs.getBoolean("betalt_kontigent"));
+                    tempMembers.put(tempcounter, temp);
+
+                }
+
+
+            }
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        tempcounter = 0;
+        return tempMembers;
+
+    }
 }

@@ -1,9 +1,16 @@
 package View;
 
+import Model.Controller;
+
 import java.util.Scanner;
 
 public class TrænerUI {
+    Controller controller = new Controller();
+    public void populateMember(){
+        controller.setMember();
+    }
     public void printMenu() {
+        populateMember();
         Scanner scanner = new Scanner(System.in);
         System.out.println("Logged in som: Træner\n");
         System.out.println("Træner Menu:\n");
