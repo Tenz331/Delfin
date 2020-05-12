@@ -1,0 +1,116 @@
+package Model;
+
+
+import Datamapper.MemberWrite;
+
+import java.time.LocalDate;
+import java.util.Scanner;
+
+public class Controller {
+    static int uId = 0;
+    Teams teams = new Teams();
+    Scanner scanner = new Scanner(System.in);
+    String tempNavn, tempEmail, tempFavSvommeArt, tempSvommeHold;
+    int age, tempTlfNr, tempInput;
+    LocalDate birthDate;
+    MemberWrite memberWrite = new MemberWrite();
+
+    public void addMember() {
+       uId = generateUnicId();
+        System.out.println(LocalDate.now());
+        System.out.println("Tilføj et nyt medlem:\n");
+        System.out.println("Meldem navn:\n");
+        tempNavn = scanner.nextLine();
+        System.out.println("\nEmail:");
+        tempEmail = scanner.nextLine();
+        System.out.println("\nFødelsdato: ÅÅ-MM-DD:");
+        birthDate = LocalDate.parse(scanner.nextLine());
+        age = LocalDate.now().getYear() - birthDate.getYear();
+        System.out.println("Svømme Art: \n [1]. Crawl, [2]. brøstsvømming, [3]. rykcrawl, [4]. butterfly");
+        try {
+            tempInput = Integer.parseInt(scanner.nextLine());
+            switch (tempInput) {
+                case 1:
+                    tempFavSvommeArt = "Crawl";
+                    break;
+                case 2:
+                    tempFavSvommeArt = "BrystSvømning";
+                    break;
+                case 3:
+                    tempFavSvommeArt = "RykCrawl";
+                    break;
+                case 4:
+                    tempFavSvommeArt = "Butterfly";
+                    break;
+                default:
+                    addMember();
+                    break;
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+            addMember();
+        }
+        System.out.println("\ntelefon Nr:");
+        tempTlfNr =  Integer.parseInt(scanner.nextLine());
+        setTeam(age);
+
+    }
+
+    private int generateUnicId() {
+        uId++;
+        return uId;
+    }
+
+
+    private void setTeam(int age) {
+        System.out.println(age);
+        if (age <=18){
+            tempSvommeHold = "Junior";
+            JuniorMedlem newJunior = new JuniorMedlem(uId,tempNavn,tempEmail,tempTlfNr,birthDate,tempFavSvommeArt,tempSvommeHold);
+            teams.addNewMember(newJunior);
+            memberWrite.setMember(newJunior);
+
+        }
+        else if(age <=59){
+            tempSvommeHold = "Senior";
+            SeniorMedlem newSenior = new SeniorMedlem(uId,tempNavn,tempEmail,tempTlfNr,birthDate,tempFavSvommeArt,tempSvommeHold);
+            teams.addNewMember(newSenior);
+            memberWrite.setMember(newSenior);
+
+        }
+        else {
+            tempSvommeHold = "Pensonist";
+            PensionistMedlem  newPensionist = new PensionistMedlem(uId,tempNavn,tempEmail,tempTlfNr,birthDate,tempFavSvommeArt,tempSvommeHold);
+            teams.addNewMember(newPensionist);
+            memberWrite.setMember(newPensionist);
+        }
+
+        System.out.println("ny "+ tempSvommeHold+ " "+"UID#"+uId+" Navn:"+tempNavn + ", Email: "+ tempEmail +", TLF: "+ tempTlfNr +", fødselsdag: "+ birthDate + ", Svømme art: "+ tempFavSvommeArt + ", Hold: "+ tempSvommeHold);
+
+
+    }
+
+    public void top5Senior() {
+    }
+
+    public void top5Junior() {
+    }
+
+    public void editKontigenter() {
+    }
+
+    public void seeKontigenter() {
+    }
+
+    public void seeRestance() {
+    }
+
+    public void deleteMember() {
+        String name;
+        name = scanner.nextLine();
+        teams.removeMember(name);
+    }
+
+    public void editMember() {
+    }
+}
