@@ -2,11 +2,12 @@ package View;
 
 import Model.Controller;
 
+import java.sql.SQLException;
 import java.util.Scanner;
 
 public class FormandUI {
     Controller controller = new Controller();
-    public void printMenu() {
+    public void printMenu() throws SQLException {
         populateMember();
         Scanner scanner = new Scanner(System.in);
         System.out.println("Logged in som: Formand\n");
@@ -33,17 +34,17 @@ public class FormandUI {
             case 2:
                controller.editMember();
                 printMenu();
-
                 break;
             case 3:
                 controller.deleteMember();
                 printMenu();
-
                 break;
             case 4:
+                controller.registerBestTime();
                 printMenu();
                 break;
             case 5:
+                controller.seeRestance();
                 printMenu();
                 break;
             case 6:
@@ -56,8 +57,7 @@ public class FormandUI {
                 printMenu();
                 break;
             case 9:
-                System.out.println("Goodbye");
-                System.exit(0);
+
                 break;
             case 10:
                 System.out.println("Goodbye");

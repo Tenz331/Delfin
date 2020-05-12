@@ -12,8 +12,9 @@ public abstract class Members {
     String favSvommeArt;
     String svommeHold;
     double kontingent;
+    boolean restance;
 
-    public Members(int unicID, String name, String email, int tlfNr, LocalDate fodselsdag, String favSvommeArt, String svommeHold,double kontingent) {
+    public Members(int unicID, String name, String email, int tlfNr, LocalDate fodselsdag, String favSvommeArt, String svommeHold,double kontingent, boolean restance) {
         this.unicID = unicID;
         this.name = name;
         this.email = email;
@@ -21,7 +22,8 @@ public abstract class Members {
         this.fodselsdag = fodselsdag;
         this.favSvommeArt = favSvommeArt;
         this.svommeHold = svommeHold;
-        this.kontingent = kontigentBeregner();
+        this.kontingent = kontingent;
+        this.restance = restance;
     }
 
     public String getName() {
@@ -61,14 +63,15 @@ public abstract class Members {
 
     @Override
     public String toString() {
-        return "Members{" +
-                ", name='" + name + '\'' +
-                ", email='" + email + '\'' +
-                ", tlfNr=" + tlfNr +
-                ", fodselsdag='" + fodselsdag + '\'' +
-                ", favSvommeArt='" + favSvommeArt + '\'' +
-                ", svommeHold='" + svommeHold + '\'' +
-                ", kontigent=" + kontingent +
-                '}';
+        return "\nMedlemmer:\n" +
+                "MedlemsID#" + unicID +
+                ",\nNavn: " + name + '\'' +
+                ", Email: '" + email + '\'' +
+                ", Telefon: " + tlfNr +
+                ", Fødselsdag dato: " + fodselsdag +
+                ", Svømme art: '" + favSvommeArt + '\'' +
+                ", Hold: " + svommeHold + '\'' +
+                ", kontingent: " + kontingent +
+                ", restance: " + restance;
     }
 }
