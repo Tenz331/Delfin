@@ -62,7 +62,7 @@ public class Controller {
         System.out.println(age);
         if (age <=18){
             tempSvommeHold = "Junior";
-            JuniorMedlem newJunior = new JuniorMedlem(tempNavn,tempEmail,tempTlfNr,birthDate,tempFavSvommeArt,tempSvommeHold);
+            JuniorMedlem newJunior = new JuniorMedlem( ,tempNavn,tempEmail,tempTlfNr,birthDate,tempFavSvommeArt,tempSvommeHold);
             teams.addNewMember(newJunior);
             memberWrite.setMember(newJunior);
 
