@@ -4,7 +4,7 @@ import java.util.Map;
 
 public class Teams {
     static int counter = 0;
-    Map<Integer, Members> teams = new HashMap<>();
+    static public Map<Integer, Members> teams = new HashMap<>();
 
     public void addNewMember(Members team ) {
         counter++;

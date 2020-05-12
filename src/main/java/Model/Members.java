@@ -13,7 +13,7 @@ public abstract class Members {
     String svommeHold;
     double kontingent;
 
-    public Members(int unicID, String name, String email, int tlfNr, LocalDate fodselsdag, String favSvommeArt, String svommeHold) {
+    public Members(int unicID, String name, String email, int tlfNr, LocalDate fodselsdag, String favSvommeArt, String svommeHold,double kontingent) {
         this.unicID = unicID;
         this.name = name;
         this.email = email;
@@ -21,6 +21,7 @@ public abstract class Members {
         this.fodselsdag = fodselsdag;
         this.favSvommeArt = favSvommeArt;
         this.svommeHold = svommeHold;
+        this.kontingent = kontigentBeregner();
     }
 
     public String getName() {
@@ -33,6 +34,10 @@ public abstract class Members {
 
     public int getTlfNr() {
         return tlfNr;
+    }
+
+    public int getUnicID() {
+        return unicID;
     }
 
     public LocalDate getFodselsdag() {
