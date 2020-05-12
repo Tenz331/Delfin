@@ -5,9 +5,9 @@ import Model.Controller;
 import java.util.Scanner;
 
 public class FormandUI {
-
+    Controller controller = new Controller();
     public void printMenu() {
-        Controller controller = new Controller();
+        populateMember();
         Scanner scanner = new Scanner(System.in);
         System.out.println("Logged in som: Formand\n");
         System.out.println("Formand Menu:\n");
@@ -31,7 +31,7 @@ public class FormandUI {
                 printMenu();
                 break;
             case 2:
-                controller.editMember();
+               controller.editMember();
                 printMenu();
 
                 break;
@@ -68,6 +68,9 @@ public class FormandUI {
                 printMenu();
         }
         System.out.println(PrintMainMenuText); //printer vores MainMenu
+    }
+    public void populateMember(){
+        controller.setMember();
     }
 
 }

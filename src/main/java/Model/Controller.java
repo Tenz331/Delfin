@@ -1,8 +1,11 @@
 package Model;
 
 
+import Datamapper.MemberRead;
 import Datamapper.MemberWrite;
 
+
+import java.lang.reflect.Member;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.time.LocalDate;
@@ -15,13 +18,20 @@ public class Controller {
     Scanner scanner = new Scanner(System.in);
     String tempNavn, tempEmail, tempFavSvommeArt, tempSvommeHold;
     int age, tempTlfNr, tempInput;
+    double tempkontingent = 0;
     LocalDate birthDate;
     MemberWrite memberWrite = new MemberWrite();
     Connection connection;
+    MemberRead MemberRead = new MemberRead();
+    static int uId = 0;
 
+    private int generateUnicId() {
+        uId++;
+        return uId;
+    }
     public void addMember() {
         System.out.println(LocalDate.now());
-
+        uId = generateUnicId();
 
         System.out.println("Tilføj et nyt medlem:\n");
         System.out.println("Meldem navn:\n");
@@ -66,19 +76,19 @@ public class Controller {
         System.out.println(age);
         if (age <= 18) {
             tempSvommeHold = "Junior";
-            JuniorMedlem newJunior = new JuniorMedlem(tempNavn, tempEmail, tempTlfNr, birthDate, tempFavSvommeArt, tempSvommeHold);
+            JuniorMedlem newJunior = new JuniorMedlem(uId,tempNavn,tempEmail,tempTlfNr,birthDate,tempFavSvommeArt,tempSvommeHold,tempkontingent);
             teams.addNewMember(newJunior);
             memberWrite.setMember(newJunior);
 
         } else if (age <= 59) {
             tempSvommeHold = "Senior";
-            SeniorMedlem newSenior = new SeniorMedlem(tempNavn, tempEmail, tempTlfNr, birthDate, tempFavSvommeArt, tempSvommeHold);
+            SeniorMedlem newSenior = new SeniorMedlem(uId,tempNavn,tempEmail,tempTlfNr,birthDate,tempFavSvommeArt,tempSvommeHold,tempkontingent);
             teams.addNewMember(newSenior);
             memberWrite.setMember(newSenior);
 
         } else {
             tempSvommeHold = "Pensonist";
-            PensionistMedlem newPensionist = new PensionistMedlem(tempNavn, tempEmail, tempTlfNr, birthDate, tempFavSvommeArt, tempSvommeHold);
+            PensionistMedlem  newPensionist = new PensionistMedlem(uId,tempNavn,tempEmail,tempTlfNr,birthDate,tempFavSvommeArt,tempSvommeHold,tempkontingent);
             teams.addNewMember(newPensionist);
             memberWrite.setMember(newPensionist);
         }
@@ -107,7 +117,7 @@ public class Controller {
 
     }
 
-    public void editMember(int uId) {
+    public void editMember() {
         System.out.println("\nWhat Member Do you want to change?");
         int tempNewID = Integer.parseInt(scanner.nextLine());
         System.out.println("\nMember To be changed:");
@@ -123,10 +133,13 @@ public class Controller {
 
     public void getSpecificMember(int tempNewID) {
         Map<Integer, Members> teams = new HashMap<>();
-        teams = getMember();
-        for (Members member : teams) {
-            if (Members.unicID == tempNewID) {
-                System.out.println("#" + Members.unicID + " " + Members.toString() + " " + Members.getKontingent + " KR.");
+       teams = MemberRead.getMember();
+
+        for(Map.Entry<Integer, Members> entry: teams.entrySet()){
+            Integer test1 = entry.getKey();
+            Members test2 = entry.getValue();
+            if (test2.unicID == tempNewID) {
+                System.out.println("#" + test2.unicID + " " + test2.kontingent + " KR.");
             }
         }
     }
@@ -162,4 +175,7 @@ public class Controller {
                 break;
         }
     }
-}
+    public void setMember() {
+        Teams.teams = MemberRead.getMember();
+        }
+    }

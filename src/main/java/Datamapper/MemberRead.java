@@ -6,50 +6,52 @@ import Model.PensionistMedlem;
 import Model.SeniorMedlem;
 import Util.DBConnect;
 
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.HashMap;
 import java.util.Map;
 
 public class MemberRead {
     Connection connection = DBConnect.getInstance().getConnection();
-    int tempcounter = 0;
+    static int tempcounter = 0;
+    private static final String USERNAME = "fullroot";
+    private static final String PASSWORD = "fullroot";
+    private static final String CONN_STR = "jdbc:mysql://cphb-gruppe1.c4mqzn3xlkdy.us-east-2.rds.amazonaws.com/";
 
-
-    Map<Integer, Members> tempMembers = new HashMap<>();
+    Map<Integer, Members> tempMembers;
 
     public Map<Integer, Members> getMember() {
+        tempMembers = new HashMap<>();
         try (
-                Statement stmt = connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
-                ResultSet rs = ((Statement) stmt).executeQuery("SELECT * FROM Delfinen")
+                Connection conn = DriverManager.getConnection(CONN_STR, USERNAME, PASSWORD);
+                Statement stmt = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+                ResultSet rs = ((Statement) stmt).executeQuery("SELECT * FROM Delfinen.Membership")
         ) {
             while (rs.next()) {
                 tempcounter++;
                 StringBuffer buffer = new StringBuffer();
                 String teamType = rs.getString("member_hold");
                 if (teamType.equals("Junior")) {
-                    JuniorMedlem temp = new JuniorMedlem(rs.getInt("unicID"), rs.getString("name"), rs.getString("email"), rs.getInt("tlfNr"), rs.getDate("fodselsdag").toLocalDate(), rs.getString("favSvommeArt"), rs.getString("svommeHold"));
+                    //StringBuffer buffer = new StringBuffer();
+                    //buffer.append(rs.getInt("member_idd"), rs.getString("member_name"), rs.getString("member_email"), rs.getInt("member_telefon"), rs.getDate("member_fodselsdag").toLocalDate(), rs.getString("member_favSvommeArt"), rs.getString("member_svommeHold"));
+                    JuniorMedlem temp = new JuniorMedlem(rs.getInt("member_idd"), rs.getString("member_name"), rs.getString("member_email"), rs.getInt("member_telefon"), rs.getDate("member_fødselsdag").toLocalDate(), rs.getString("member_favSvømmeArt"), rs.getString("member_hold"),rs.getDouble("member_kontingent"));
                     tempMembers.put(tempcounter, temp);
 
                 } else if (teamType.equals("Senior")) {
-                    SeniorMedlem temp = new SeniorMedlem(rs.getInt("unicID"), rs.getString("name"), rs.getString("email"), rs.getInt("tlfNr"), rs.getDate("fodselsdag").toLocalDate(), rs.getString("favSvommeArt"), rs.getString("svommeHold"));
+                    SeniorMedlem temp = new SeniorMedlem(rs.getInt("member_idd"), rs.getString("member_name"), rs.getString("member_email"), rs.getInt("member_telefon"), rs.getDate("member_fødselsdag").toLocalDate(), rs.getString("member_favSvømmeArt"), rs.getString("member_hold"),rs.getDouble("member_kontingent"));
+                    System.out.println(temp.toString());
                     tempMembers.put(tempcounter, temp);
 
                 } else {
-                    PensionistMedlem temp = new PensionistMedlem(rs.getInt("unicID"), rs.getString("name"), rs.getString("email"), rs.getInt("tlfNr"), rs.getDate("fodselsdag").toLocalDate(), rs.getString("favSvommeArt"), rs.getString("svommeHold"));
+                    PensionistMedlem temp = new PensionistMedlem(rs.getInt("member_idd"), rs.getString("member_name"), rs.getString("member_email"), rs.getInt("member_telefon"), rs.getDate("member_fødselsdag").toLocalDate(), rs.getString("member_favSvømmeArt"), rs.getString("member_hold"),rs.getDouble("member_kontingent"));
                     tempMembers.put(tempcounter, temp);
 
                 }
-
-                buffer.append("Member:" + rs.getInt("member_idd") + rs.getString("member_name") + rs.getString("member_email") + rs.getInt("member_telefon") + rs.getInt("member-fødselsdag") + rs.getString("member_favSvømmeart") + rs.getString("member_hold") + rs.getInt("member_kontingent"));
-
 
             }
         } catch (SQLException e) {
             System.out.println(e);
         }
+        tempcounter = 0;
         return tempMembers;
     }
 
