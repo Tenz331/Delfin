@@ -19,14 +19,14 @@ public class Controller {
 
 
         System.out.println("Tilføj et nyt medlem:\n");
-        System.out.println("Meldem navn:\n");
+        System.out.println("Medlem navn:\n");
         tempNavn = scanner.nextLine();
         System.out.println("\nEmail:");
         tempEmail = scanner.nextLine();
         System.out.println("\nFødelsdato: ÅÅ-MM-DD:");
         birthDate = LocalDate.parse(scanner.nextLine());
         age = LocalDate.now().getYear() - birthDate.getYear();
-        System.out.println("Svømme Art: \n [1]. Crawl, [2]. brøstsvømming, [3]. rykcrawl, [4]. butterfly");
+        System.out.println("Svømme Art: \n [1]. Crawl, [2]. brystsvømming, [3]. rygcrawl, [4]. butterfly");
         try {
             tempInput = Integer.parseInt(scanner.nextLine());
             switch (tempInput) {
