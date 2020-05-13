@@ -99,6 +99,26 @@ public class MemberWrite {
         }
 
     }
+
+    public void addKonkurrence(double tid,String type, String konkurrencenLocation, Members member) {
+        tempmembers = new ArrayList<>();
+        tempmembers.add(member);
+        try {
+            for (Members i : tempmembers) {
+                String query = "INSERT INTO Delfinen.StatistikDB (member_idd, member_name, DB_tournament, DB_placement, member_hold, DB_tid )" + "values(?,?,?,?,?,?)";
+                PreparedStatement preparedStatement = conn.prepareStatement(query);
+                preparedStatement.setInt(1, i.getUnicID());
+                preparedStatement.setString(2, i.getName());
+                preparedStatement.setString(3,type);
+                preparedStatement.setString(4,konkurrencenLocation);
+                preparedStatement.setString(5,i.getSvommeHold());
+                preparedStatement.setDouble(6,tid);
+                preparedStatement.execute();
+            }
+        }catch (SQLException e) {
+            System.out.println(e);
+        }
+    }
 }
 
 

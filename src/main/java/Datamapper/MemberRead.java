@@ -5,7 +5,6 @@ import Model.Members;
 import Model.PensionistMedlem;
 import Model.SeniorMedlem;
 import Util.DBConnect;
-
 import java.sql.*;
 import java.util.HashMap;
 import java.util.Map;
@@ -25,7 +24,7 @@ public class MemberRead {
                 Statement stmt2 = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
                 ResultSet rs2 = ((Statement) stmt2).executeQuery("SELECT * FROM Delfinen.Restance");
         ) {
-            if(rs.next() && rs2.next()) {
+            while(rs.next() && rs2.next()) {
                 tempcounter++;
                 StringBuffer buffer = new StringBuffer();
                 String teamType = rs.getString("member_hold");
@@ -55,9 +54,7 @@ public class MemberRead {
     public void top5Junior() {
         try (
                 Statement stmt = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
-
-                ResultSet rs = ((Statement) stmt).executeQuery("SELECT * FROM Delfinen.StatistikDB WHERE member_hold = junior ORDER BY DB_tid DESC LIMIT 5")
-
+                ResultSet rs = ((Statement) stmt).executeQuery("SELECT * FROM Delfinen.StatistikDB WHERE member_hold = Junior ORDER BY DB_tid DESC LIMIT 5")
         ) {
             while (rs.next()) {
                 StringBuffer buffer = new StringBuffer();
@@ -68,7 +65,25 @@ public class MemberRead {
             e.printStackTrace();
         }
     }
+    public int getMaxUid() {
+        int tempUID = 0;
+        //'Connection', 'Statement' and 'ResultSet' are AUTO-CLOSABLE when with TRY-WITH-RESOURCES BLOCK (...)
+        try (
+                Statement stmt = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+                ResultSet rs = ((Statement) stmt).executeQuery("SELECT MAX(member_idd) FROM Delfinen.Membership")
+        ) {
+            while (rs.next()) {
+                tempUID = rs.getInt("MAX(member_idd)");
 
+            }
+
+
+        } catch (SQLException e) {
+            //Different error messages
+            System.out.println(e);
+        }
+        return tempUID;
+    } //finder højeste
     public void getDisciplin() {
 
     }
