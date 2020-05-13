@@ -117,12 +117,30 @@ public class Controller {
     }
 
     public void deleteMember() {
+        System.out.println(memberRead.getMember());
+        System.out.println("\nWhat Member Do you want to change? >ID#");
+        int tempNewID = Integer.parseInt(scanner.nextLine());
+        System.out.println("\nMember To be changed:");
+        getSpecificMember(tempNewID); //finder den member brugeren inputter
+        System.out.println("\nCorrect?\n[1] Yes,\n[2] No, \n[3] Exit.");
+        int userInput = Integer.parseInt(scanner.nextLine());
+        switch (userInput){
+            case 1:
+                memberWrite.deleteMember(tempNewID);
+                break;
+            case 2:
+                deleteMember();
+                break;
+            default:
+                System.out.println("error in input~");
+                break;
+        }
 
     }
 
     public void editMember() {
         System.out.println(memberRead.getMember());
-        System.out.println("\nWhat Member Do you want to change?");
+        System.out.println("\nWhat Member Do you want to change? >ID#");
         int tempNewID = Integer.parseInt(scanner.nextLine());
         System.out.println("\nMember To be changed:");
         getSpecificMember(tempNewID); //finder den member brugeren inputter

@@ -7,6 +7,7 @@ import java.util.Scanner;
 
 public class FormandUI {
     Controller controller = new Controller();
+
     public void printMenu() throws SQLException {
         populateMember();
         Scanner scanner = new Scanner(System.in);
@@ -32,7 +33,7 @@ public class FormandUI {
                 printMenu();
                 break;
             case 2:
-               controller.editMember();
+                controller.editMember();
                 printMenu();
                 break;
             case 3:
@@ -69,7 +70,8 @@ public class FormandUI {
         }
         System.out.println(PrintMainMenuText); //printer vores MainMenu
     }
-    public void populateMember(){
+
+    public void populateMember() {
         controller.setMember();
     }
 
