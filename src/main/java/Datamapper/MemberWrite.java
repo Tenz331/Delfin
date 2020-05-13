@@ -5,7 +5,6 @@ import Util.DBConnect;
 
 import java.sql.*;
 import java.util.ArrayList;
-import java.util.HashMap;
 
 public class MemberWrite {
     Connection conn = DBConnect.getInstance().getConnection();
@@ -19,7 +18,7 @@ public class MemberWrite {
             tempmembers.add(members);
             for (Members i : tempmembers) {
                 System.out.println(i.getName().toString());
-                String query = "INSERT INTO Delfinen.Membership (member_idd, member_name, member_email, member_telefon, member_fødselsdag, member_favSvømmeart, member_hold, member_kontingent, betalt_kontigent)" + "values(?,?,?,?,?,?,?,?,?)";
+                String query = "INSERT INTO Delfinen.Membership (member_idd, member_name, member_email, member_telefon, member_fødselsdag, member_favSvømmeart, member_hold, betalt_kontigent, member_aktiv)" + "values(?,?,?,?,?,?,?,?,?)";
                 PreparedStatement preparedStatement = conn.prepareStatement(query);
                 preparedStatement.setInt(1, i.getUnicID());
                 preparedStatement.setString(2, i.getName());
@@ -28,23 +27,33 @@ public class MemberWrite {
                 preparedStatement.setDate(5, Date.valueOf(i.getFodselsdag()));
                 preparedStatement.setString(6, i.getFavSvommeArt());
                 preparedStatement.setString(7, i.getSvommeHold());
-                preparedStatement.setDouble(8, i.kontigentBeregner());
-                preparedStatement.setBoolean(9,false);
+                preparedStatement.setBoolean(8,false);
+                preparedStatement.setBoolean(9,true);
                 preparedStatement.execute();
+                setKontigent(members);
             }
         } catch (SQLException e) {
             System.out.println(e);
         }
     }
 
-    public void updateMember() {
-    }
+    private void setKontigent(Members members) {
+        tempmembers = new ArrayList<>();
+        tempmembers.add(members);
+        try {
+            for (Members i : tempmembers) {
+                String query = "INSERT INTO Delfinen.Restance (member_name, member_kontigent)" + "values(?,?)";
+                PreparedStatement preparedStatement = conn.prepareStatement(query);
+                preparedStatement.setString(1, i.getName());
+                preparedStatement.setDouble(2, i.kontigentBeregner());
+                preparedStatement.execute();
+            }
+        }catch (SQLException e) {
+            System.out.println(e);
+            }
+        }
 
-    public void registerDisciplin() {
-    }
 
-    public void registerResult() {
-    }
     public void updateTeam(int tempNewID, String change, Members members){
         try {
             double timeToDouble = Double.parseDouble(change);
@@ -76,6 +85,39 @@ public class MemberWrite {
             System.out.println("Make sure your input is correct");
         }
 
+    }
+
+    public void deleteMember(int id) {
+        try {
+            String query = "Delete from Delfinen.Membership where member_idd = '" + id+"'";
+            PreparedStatement preparedStatement = conn.prepareStatement(query);
+            preparedStatement.execute();
+            System.out.println("Member ID #" + id + " Has been deleted");
+        }   catch (Exception e) {
+            System.out.println("ERROR! :" + e);
+            System.out.println("Make sure your input is correct");
+        }
+
+    }
+
+    public void addKonkurrence(double tid,String type, String konkurrencenLocation, Members member) {
+        tempmembers = new ArrayList<>();
+        tempmembers.add(member);
+        try {
+            for (Members i : tempmembers) {
+                String query = "INSERT INTO Delfinen.StatistikDB (member_idd, member_name, DB_tournament, DB_placement, member_hold, DB_tid )" + "values(?,?,?,?,?,?)";
+                PreparedStatement preparedStatement = conn.prepareStatement(query);
+                preparedStatement.setInt(1, i.getUnicID());
+                preparedStatement.setString(2, i.getName());
+                preparedStatement.setString(3,type);
+                preparedStatement.setString(4,konkurrencenLocation);
+                preparedStatement.setString(5,i.getSvommeHold());
+                preparedStatement.setDouble(6,tid);
+                preparedStatement.execute();
+            }
+        }catch (SQLException e) {
+            System.out.println(e);
+        }
     }
 }
 

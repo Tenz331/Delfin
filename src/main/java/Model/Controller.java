@@ -104,6 +104,7 @@ public class Controller {
     }
 
     public void top5Junior() {
+        memberRead.top5Junior();
     }
 
     public void editKontigenter() {
@@ -117,12 +118,30 @@ public class Controller {
     }
 
     public void deleteMember() {
+        System.out.println(memberRead.getMember());
+        System.out.println("\nWhat Member Do you want to change? >ID#");
+        int tempNewID = Integer.parseInt(scanner.nextLine());
+        System.out.println("\nMember To be changed:");
+        getSpecificMember(tempNewID); //finder den member brugeren inputter
+        System.out.println("\nCorrect?\n[1] Yes,\n[2] No, \n[3] Exit.");
+        int userInput = Integer.parseInt(scanner.nextLine());
+        switch (userInput){
+            case 1:
+                memberWrite.deleteMember(tempNewID);
+                break;
+            case 2:
+                deleteMember();
+                break;
+            default:
+                System.out.println("error in input~");
+                break;
+        }
 
     }
 
     public void editMember() {
         System.out.println(memberRead.getMember());
-        System.out.println("\nWhat Member Do you want to change?");
+        System.out.println("\nWhat Member Do you want to change? >ID#");
         int tempNewID = Integer.parseInt(scanner.nextLine());
         System.out.println("\nMember To be changed:");
         getSpecificMember(tempNewID); //finder den member brugeren inputter
@@ -133,6 +152,25 @@ public class Controller {
         String change = scanner.nextLine();
         System.out.println("Updating member..#" + tempNewID);
         modifyMember(tempNewID, input, change);
+    }
+    public void updateKonkurrence() {
+        System.out.println(memberRead.getMember());
+        System.out.println("\nHvilken medlem skal tilføjes til konkurrence >ID#");
+        int tempNewID = Integer.parseInt(scanner.nextLine());
+        System.out.println("\nMember To be changed:");
+        Members member = getSpecificMember(tempNewID); //finder den member brugeren inputter
+        System.out.println("\nHvilken type konkurrence var det owo?");
+        String type = scanner.nextLine();
+
+        System.out.println("\nHvor blev konkurrencen afholdt?");
+        String konkurrencenLocation = scanner.nextLine();
+        System.out.println("\nHvad var "+ member.name +" tid?");
+        double tid =  Double.parseDouble(scanner.nextLine());
+        memberWrite.addKonkurrence(tid,type,konkurrencenLocation,member);
+
+
+
+
     }
 
     public void registerBestTime() {
@@ -176,9 +214,8 @@ public class Controller {
 
     public void setMember() {
         Teams.teams = memberRead.getMember();
-        uId = memberRead.getMember().size();
+        uId = memberRead.getMaxUid();
 
     }
-
 
 }

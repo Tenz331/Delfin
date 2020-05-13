@@ -7,6 +7,7 @@ import java.util.Scanner;
 
 public class FormandUI {
     Controller controller = new Controller();
+
     public void printMenu() throws SQLException {
         populateMember();
         Scanner scanner = new Scanner(System.in);
@@ -19,9 +20,9 @@ public class FormandUI {
                         " Skriv: [4] Register best time.\n" +
                         " Skriv: [5] Se restance. \n" +
                         " Skriv: [6] Se kontingenter. \n" +
-                        " Skriv: [7] Ændre kontigenter. \n" +
-                        " Skriv: [8] Top 5 Juinior. \n " +
-                        "Skriv: [9] Top 5 Senior. \n " +
+                        " Skriv: [7] Top 5 Juinior. \n " +
+                        "Skriv: [8] Top 5 Senior. \n " +
+                        "Skriv: [9] For at tilføjse konkurrence data. \n " +
                         "Skriv: [10] exit.\n " +
                         "\nInput:";
         System.out.println(PrintMainMenuText);
@@ -32,7 +33,7 @@ public class FormandUI {
                 printMenu();
                 break;
             case 2:
-               controller.editMember();
+                controller.editMember();
                 printMenu();
                 break;
             case 3:
@@ -51,13 +52,15 @@ public class FormandUI {
                 printMenu();
                 break;
             case 7:
+                controller.top5Junior();
                 printMenu();
                 break;
             case 8:
+                controller.top5Senior();
                 printMenu();
                 break;
             case 9:
-
+                controller.updateKonkurrence();
                 break;
             case 10:
                 System.out.println("Goodbye");
@@ -69,7 +72,8 @@ public class FormandUI {
         }
         System.out.println(PrintMainMenuText); //printer vores MainMenu
     }
-    public void populateMember(){
+
+    public void populateMember() {
         controller.setMember();
     }
 
