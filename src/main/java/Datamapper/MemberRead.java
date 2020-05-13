@@ -52,7 +52,22 @@ public class MemberRead {
         tempcounter = 0;
         return tempMembers;
     }
+    public void top5Junior() {
+        try (
+                Statement stmt = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
 
+                ResultSet rs = ((Statement) stmt).executeQuery("SELECT * FROM Delfinen.StatistikDB WHERE member_hold = junior ORDER BY DB_tid DESC LIMIT 5")
+
+        ) {
+            while (rs.next()) {
+                StringBuffer buffer = new StringBuffer();
+                String fastestTime = rs.getString(1);
+                System.out.println("Top 5 List:\n " + fastestTime + "\n");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
     public void getDisciplin() {
 
     }
