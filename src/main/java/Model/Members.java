@@ -47,6 +47,14 @@ public abstract class Members {
         return fodselsdag;
     }
 
+    public boolean isRestance() {
+        return restance;
+    }
+
+    public void setRestance(boolean restance) {
+        this.restance = restance;
+    }
+
     public String getFavSvommeArt() {
         return favSvommeArt;
     }
@@ -63,7 +71,7 @@ public abstract class Members {
 
     @Override
     public String toString() {
-        return "\nMedlemmer:\n" +
+        return ":\n" +
                 "MedlemsID#" + unicID +
                 ",\nNavn: " + name + '\'' +
                 ", Email: '" + email + '\'' +
@@ -72,6 +80,6 @@ public abstract class Members {
                 ", Svømme art: '" + favSvommeArt + '\'' +
                 ", Hold: " + svommeHold + '\'' +
                 ", kontingent: " + kontingent +
-                ", restance: " + restance;
+                ", restance: " + restance+"\n";
     }
 }

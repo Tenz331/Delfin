@@ -5,6 +5,7 @@ import Model.Members;
 import Model.PensionistMedlem;
 import Model.SeniorMedlem;
 import Util.DBConnect;
+
 import java.sql.*;
 import java.util.HashMap;
 import java.util.Map;
@@ -15,6 +16,45 @@ public class MemberRead {
 
     Map<Integer, Members> tempMembers;
 
+    public Map<Integer, Members> getSpecificMember(int id) {
+        tempMembers = new HashMap<>();
+
+        try {
+            Statement stmt = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+            ResultSet rs = ((Statement) stmt).executeQuery("SELECT * FROM Delfinen.Membership");
+            Statement stmt2 = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY); //hacked fix lol
+            ResultSet rs2 = ((Statement) stmt2).executeQuery("SELECT * FROM Delfinen.Restance");
+            while (rs.next() && rs2.next()) {
+                String teamType = rs.getString("member_hold");
+                int uid = rs.getInt("member_idd");
+                if (teamType.equals("Junior")) {
+                    if (uid == id) {
+                        JuniorMedlem temp = new JuniorMedlem(rs.getInt("member_idd"), rs.getString("member_name"), rs.getString("member_email"), rs.getInt("member_telefon"), rs.getDate("member_fødselsdag").toLocalDate(), rs.getString("member_favSvømmeArt"), rs.getString("member_hold"), rs2.getDouble("member_kontigent"), rs.getBoolean("betalt_kontigent"));
+                        tempMembers.put(id, temp);
+                        return tempMembers;
+
+                    }
+                } else if (teamType.equals("Senior")) {
+                    if (uid == id) {
+                        SeniorMedlem temp = new SeniorMedlem(rs.getInt("member_idd"), rs.getString("member_name"), rs.getString("member_email"), rs.getInt("member_telefon"), rs.getDate("member_fødselsdag").toLocalDate(), rs.getString("member_favSvømmeArt"), rs.getString("member_hold"), rs2.getDouble("member_kontigent"), rs.getBoolean("betalt_kontigent"));
+                        tempMembers.put(id, temp);
+                        return tempMembers;
+
+                    }
+                } else {
+                    if (uid == id) {
+                        PensionistMedlem temp = new PensionistMedlem(rs.getInt("member_idd"), rs.getString("member_name"), rs.getString("member_email"), rs.getInt("member_telefon"), rs.getDate("member_fødselsdag").toLocalDate(), rs.getString("member_favSvømmeArt"), rs.getString("member_hold"), rs2.getDouble("member_kontigent"), rs.getBoolean("betalt_kontigent"));
+                        tempMembers.put(id, temp);
+                        return tempMembers;
+                    }
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
     public Map<Integer, Members> getMember() {
         tempMembers = new HashMap<>();
         try (
@@ -24,9 +64,8 @@ public class MemberRead {
                 Statement stmt2 = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
                 ResultSet rs2 = ((Statement) stmt2).executeQuery("SELECT * FROM Delfinen.Restance");
         ) {
-            while(rs.next() && rs2.next()) {
+            while (rs.next() && rs2.next()) {
                 tempcounter++;
-                StringBuffer buffer = new StringBuffer();
                 String teamType = rs.getString("member_hold");
                 if (teamType.equals("Junior")) {
                     //StringBuffer buffer = new StringBuffer();
@@ -51,6 +90,7 @@ public class MemberRead {
         tempcounter = 0;
         return tempMembers;
     }
+
     public void top5Junior() {
         try (
                 Statement stmt = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
@@ -65,6 +105,7 @@ public class MemberRead {
             e.printStackTrace();
         }
     }
+
     public int getMaxUid() {
         int tempUID = 0;
         //'Connection', 'Statement' and 'ResultSet' are AUTO-CLOSABLE when with TRY-WITH-RESOURCES BLOCK (...)
@@ -84,6 +125,7 @@ public class MemberRead {
         }
         return tempUID;
     } //finder højeste
+
     public void getDisciplin() {
 
     }

@@ -37,7 +37,7 @@ public class MemberWrite {
         }
     }
 
-    private void setKontigent(Members members) {
+    public void setKontigent(Members members) {
         tempmembers = new ArrayList<>();
         tempmembers.add(members);
         try {
@@ -100,7 +100,7 @@ public class MemberWrite {
 
     }
 
-    public void addKonkurrence(double tid,String type, String konkurrencenLocation, Members member) {
+    public void addKonkurrence(String tid,String type, String konkurrencenLocation, Members member) {
         tempmembers = new ArrayList<>();
         tempmembers.add(member);
         try {
@@ -112,7 +112,7 @@ public class MemberWrite {
                 preparedStatement.setString(3,type);
                 preparedStatement.setString(4,konkurrencenLocation);
                 preparedStatement.setString(5,i.getSvommeHold());
-                preparedStatement.setDouble(6,tid);
+                preparedStatement.setString(6,tid);
                 preparedStatement.execute();
             }
         }catch (SQLException e) {
