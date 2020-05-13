@@ -68,6 +68,7 @@ public class MemberRead {
             e.printStackTrace();
         }
     }
+
     public void getDisciplin() {
 
     }
