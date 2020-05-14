@@ -119,6 +119,30 @@ public class MemberWrite {
             System.out.println(e);
         }
     }
-}
+
+    public void updateKontingentActive(int memberID, String memberKontingent ) {
+        try {
+            String query = "UPDATE Delfinen.Membership SET betalt_kontigent = '" + memberKontingent + "'WHERE member_idd = " + memberID + "";
+            PreparedStatement preparedStatement = conn.prepareStatement(query);
+            preparedStatement.execute();
+
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+    }
+    public void updateMemberActive(int memberID, String memberActive) {
+        try {
+            String query = "UPDATE Delfinen.Membership SET member_aktiv ='" + memberActive + "' WHERE member_idd = " + memberID + "";
+            PreparedStatement preparedStatement = conn.prepareStatement(query);
+            preparedStatement.execute();
+
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+    }
+
+    }
+
+
 
 
