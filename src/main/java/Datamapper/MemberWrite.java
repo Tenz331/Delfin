@@ -42,10 +42,11 @@ public class MemberWrite {
         tempmembers.add(members);
         try {
             for (Members i : tempmembers) {
-                String query = "INSERT INTO Delfinen.Restance (member_name, member_kontigent)" + "values(?,?)";
+                String query = "INSERT INTO Delfinen.Restance (member_idd, member_name, member_kontigent)" + "values(?,?,?)";
                 PreparedStatement preparedStatement = conn.prepareStatement(query);
-                preparedStatement.setString(1, i.getName());
-                preparedStatement.setDouble(2, i.kontigentBeregner());
+                preparedStatement.setInt(1, i.getUnicID());
+                preparedStatement.setString(2, i.getName());
+                preparedStatement.setDouble(3, i.kontigentBeregner());
                 preparedStatement.execute();
             }
         }catch (SQLException e) {
@@ -54,15 +55,11 @@ public class MemberWrite {
         }
 
 
-    public void updateTeam(int tempNewID, String change, Members members){
+    public void updateTeam(int tempNewID, double change, Members members, String disciplin, String lokation){
         try {
-            double timeToDouble = Double.parseDouble(change);
             //'Connection', 'Statement' and 'ResultSet' are AUTO-CLOSABLE when with TRY-WITH-RESOURCES BLOCK (...)
-            String query = "INSERT INTO Delfinen.StatistikDB (member_idd, member_name, DB_tid)" + "values(?,?,?)";
+            String query = "UPDATE Delfinen.StatistikDB SET DB_tid = " + change + " WHERE member_idd = " + tempNewID;
             PreparedStatement preparedStatement = conn.prepareStatement(query);
-            preparedStatement.setInt(1,members.getUnicID());
-            preparedStatement.setString(2,members.getName());
-            preparedStatement.setDouble(3,timeToDouble);
             preparedStatement.execute();
             System.out.println("Member-ID #" + tempNewID + " Has been changed with the value: " + change);
         } catch (Exception e) {
@@ -89,7 +86,7 @@ public class MemberWrite {
 
     public void deleteMember(int id) {
         try {
-            String query = "Delete from Delfinen.Membership where member_idd = '" + id+"'";
+            String query = "UPDATE Delfinen.Membership SET member_aktiv = '0' WHERE member_idd = "+ id;
             PreparedStatement preparedStatement = conn.prepareStatement(query);
             preparedStatement.execute();
             System.out.println("Member ID #" + id + " Has been deleted");
@@ -120,9 +117,9 @@ public class MemberWrite {
         }
     }
 
-    public void updateKontingentActive(int memberID, String memberKontingent ) {
+    public void updateKontingentActive(Members member, int memberKontingent ) {
         try {
-            String query = "UPDATE Delfinen.Membership SET betalt_kontigent = '" + memberKontingent + "'WHERE member_idd = " + memberID + "";
+            String query = "UPDATE Delfinen.Membership SET betalt_kontigent = '" + memberKontingent + "'WHERE member_idd = " + member.getUnicID() + "";
             PreparedStatement preparedStatement = conn.prepareStatement(query);
             preparedStatement.execute();
 
@@ -130,9 +127,9 @@ public class MemberWrite {
             System.out.println(e);
         }
     }
-    public void updateMemberActive(int memberID, String memberActive) {
+    public void updateMemberActive(Members member, int memberActive) {
         try {
-            String query = "UPDATE Delfinen.Membership SET member_aktiv ='" + memberActive + "' WHERE member_idd = " + memberID + "";
+            String query = "UPDATE Delfinen.Membership SET member_aktiv ='" + memberActive + "' WHERE member_idd = " + member.getUnicID() + "";
             PreparedStatement preparedStatement = conn.prepareStatement(query);
             preparedStatement.execute();
 
@@ -141,7 +138,42 @@ public class MemberWrite {
         }
     }
 
+    public void updateMember(Members members, String update, int change) {
+        boolean tempbool;
+        if (update.equals("true")) {
+            tempbool = true;
+        }else {
+            tempbool = false;
+        }
+        try {
+            switch (change) {
+                case 1:
+                    String query = "UPDATE Delfinen.Membership SET member_hold = '" + update + "'WHERE member_idd = " + members.getUnicID();
+                    PreparedStatement preparedStatement = conn.prepareStatement(query);
+                    preparedStatement.execute();
+                    break;
+                case 2:
+                     query = "UPDATE Delfinen.Membership SET betalt_kontigent = '" + tempbool + "'WHERE member_idd = " + members.getUnicID();
+                     preparedStatement = conn.prepareStatement(query);
+                    preparedStatement.execute();
+                    break;
+                case 3:
+                    query = "UPDATE Delfinen.Membership SET member_aktiv = '" + tempbool + "'WHERE member_idd = " + members.getUnicID();
+                    preparedStatement = conn.prepareStatement(query);
+                    preparedStatement.execute();
+                    break;
+                default:
+
+            }
+        }catch (SQLException e) {
+            System.out.println(e);
+
+
+
     }
+    }
+}
+
 
 
 

@@ -51,17 +51,22 @@ public class MemberRead {
         tempcounter = 0;
         return tempMembers;
     }
-    public void top5Junior() {
+    public void top5Junior(){
         try (
                 Statement stmt = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
-                ResultSet rs = ((Statement) stmt).executeQuery("SELECT * FROM Delfinen.StatistikDB WHERE member_hold = Junior ORDER BY DB_tid DESC LIMIT 5")
+                ResultSet rs = ((Statement) stmt).executeQuery("SELECT * FROM Delfinen.StatistikDB WHERE member_hold = 'Junior' ORDER BY DB_tid ASC LIMIT 5")
         ) {
+            System.out.println("Top 5 List Junior:\n ");
             while (rs.next()) {
                 StringBuffer buffer = new StringBuffer();
-                String fastestTime = rs.getString(1);
-                System.out.println("Top 5 List:\n " + fastestTime + "\n");
-            }
-        } catch (SQLException e) {
+                String fastestTime = rs.getString(2);
+                String fastestTime2 = rs.getString(3);
+                String fastestTime3 = rs.getString(4);
+                String fastestTime4 = rs.getString(7);
+
+                System.out.println("#" + fastestTime + " Name: " + fastestTime2 + "Disciplin: " + fastestTime3 + " Time: " + fastestTime4 + "\n");
+            }}
+        catch (SQLException e) {
             e.printStackTrace();
         }
     }
@@ -116,15 +121,15 @@ public class MemberRead {
                 String teamType = rs.getString("member_hold");
                 tempcounter++;
                 if (teamType.equals("Junior")) {
-                    JuniorMedlem temp = new JuniorMedlem(rs.getInt("member_idd"), rs.getString("member_name"), rs.getString("member_email"), rs.getInt("member_telefon"), rs.getDate("member_fødselsdag").toLocalDate(), rs.getString("member_favSvømmeArt"), rs.getString("member_hold"), rs.getDouble("member_kontingent"), rs.getBoolean("betalt_kontigent"));
+                    JuniorMedlem temp = new JuniorMedlem(rs.getInt("member_idd"), rs.getString("member_name"), rs.getString("member_email"), rs.getInt("member_telefon"), rs.getDate("member_fødselsdag").toLocalDate(), rs.getString("member_favSvømmeArt"), rs.getString("member_hold"), rs.getDouble("betalt_kontigent"), rs.getBoolean("betalt_kontigent"));
                     tempMembers.put(tempcounter, temp);
 
                 } else if (teamType.equals("Senior")) {
-                    SeniorMedlem temp = new SeniorMedlem(rs.getInt("member_idd"), rs.getString("member_name"), rs.getString("member_email"), rs.getInt("member_telefon"), rs.getDate("member_fødselsdag").toLocalDate(), rs.getString("member_favSvømmeArt"), rs.getString("member_hold"), rs.getDouble("member_kontingent"), rs.getBoolean("betalt_kontigent"));
+                    SeniorMedlem temp = new SeniorMedlem(rs.getInt("member_idd"), rs.getString("member_name"), rs.getString("member_email"), rs.getInt("member_telefon"), rs.getDate("member_fødselsdag").toLocalDate(), rs.getString("member_favSvømmeArt"), rs.getString("member_hold"), rs.getDouble("betalt_kontigent"), rs.getBoolean("betalt_kontigent"));
                     tempMembers.put(tempcounter, temp);
 
                 } else {
-                    PensionistMedlem temp = new PensionistMedlem(rs.getInt("member_idd"), rs.getString("member_name"), rs.getString("member_email"), rs.getInt("member_telefon"), rs.getDate("member_fødselsdag").toLocalDate(), rs.getString("member_favSvømmeArt"), rs.getString("member_hold"), rs.getDouble("member_kontingent"), rs.getBoolean("betalt_kontigent"));
+                    PensionistMedlem temp = new PensionistMedlem(rs.getInt("member_idd"), rs.getString("member_name"), rs.getString("member_email"), rs.getInt("member_telefon"), rs.getDate("member_fødselsdag").toLocalDate(), rs.getString("member_favSvømmeArt"), rs.getString("member_hold"), rs.getDouble("betalt_kontigent"), rs.getBoolean("betalt_kontigent"));
                     tempMembers.put(tempcounter, temp);
 
                 }

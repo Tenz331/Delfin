@@ -19,9 +19,9 @@ public class FormandUI {
                         " Skriv: [3] Slet medlem. \n" +
                         " Skriv: [4] Register best time.\n" +
                         " Skriv: [5] Se restance. \n" +
-                        " Skriv: [6] Se Top 5 Junior. \n" +
-                        " Skriv: [7] Se Top 5 Senior. \n " +
-                        "Skriv: [8] For at tilføj/se konkurrence data. \n " +
+                        " Skriv: [6] Top 5 Juinior. \n " +
+                        "Skriv: [7] Top 5 Senior. \n " +
+                        "Skriv: [8] For at tilføjse konkurrence data. \n " +
                         "Skriv: [9] exit.\n " +
                         "\nInput:";
         System.out.println(PrintMainMenuText);
@@ -63,6 +63,7 @@ public class FormandUI {
                 System.out.println("Goodbye");
                 System.exit(0);
                 break;
+
             default:
                 System.out.println("Error in input: '" + input + "'");
                 printMenu();
