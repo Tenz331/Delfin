@@ -117,7 +117,7 @@ public class MemberRead {
                 ResultSet rs = ((Statement) stmt).executeQuery("SELECT * FROM Delfinen.Membership WHERE betalt_kontigent = '0' ")
 
         ) {
-            if (rs.next()) {
+            while(rs.next()) {
                 String teamType = rs.getString("member_hold");
                 tempcounter++;
                 if (teamType.equals("Junior")) {
