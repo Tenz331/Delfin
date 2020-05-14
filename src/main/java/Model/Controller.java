@@ -103,9 +103,6 @@ public class Controller {
         memberRead.top5Junior();
     }
 
-    public void editKontigenter() {
-    }
-
     public void seeRestance() throws SQLException {
         System.out.println(memberRead.checkRestance());
     }
