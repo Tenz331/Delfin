@@ -54,17 +54,44 @@ public class MemberRead {
     public void top5Junior() {
         try (
                 Statement stmt = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
-                ResultSet rs = ((Statement) stmt).executeQuery("SELECT * FROM Delfinen.StatistikDB WHERE member_hold = Junior ORDER BY DB_tid DESC LIMIT 5")
+                ResultSet rs = ((Statement) stmt).executeQuery("SELECT * FROM Delfinen.StatistikDB WHERE member_hold = 'Junior' ORDER BY DB_tid ASC LIMIT 5")
         ) {
+            System.out.println("Top 5 List Junior:\n ");
             while (rs.next()) {
                 StringBuffer buffer = new StringBuffer();
-                String fastestTime = rs.getString(1);
-                System.out.println("Top 5 List:\n " + fastestTime + "\n");
+                String fastestTime = rs.getString(2);
+                String fastestTime2 = rs.getString(3);
+                String fastestTime3 = rs.getString(4);
+                String fastestTime4 = rs.getString(7);
+
+                System.out.println("#"+fastestTime + " Name: "+fastestTime2+" Disciplin: "+fastestTime3+" Time: "+fastestTime4+"\n");
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
+
+    public void top5Senior(){
+    try (
+        Statement stmt = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+        ResultSet rs = ((Statement) stmt).executeQuery("SELECT * FROM Delfinen.StatistikDB WHERE member_hold = 'Senior' ORDER BY DB_tid ASC LIMIT 5")
+        ) {
+            System.out.println("Top 5 List Senior:\n ");
+            while (rs.next()) {
+                StringBuffer buffer = new StringBuffer();
+                String fastestTime = rs.getString(2);
+                String fastestTime2 = rs.getString(3);
+                String fastestTime3 = rs.getString(4);
+                String fastestTime4 = rs.getString(7);
+
+                System.out.println("#" + fastestTime + " Name: " + fastestTime2 + "Disciplin: " + fastestTime3 + " Time: " + fastestTime4 + "\n");
+            }}
+            catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+
+
     public int getMaxUid() {
         int tempUID = 0;
         //'Connection', 'Statement' and 'ResultSet' are AUTO-CLOSABLE when with TRY-WITH-RESOURCES BLOCK (...)

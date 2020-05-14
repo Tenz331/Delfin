@@ -101,6 +101,7 @@ public class Controller {
     }
 
     public void top5Senior() {
+        memberRead.top5Senior();
     }
 
     public void top5Junior() {
@@ -110,7 +111,7 @@ public class Controller {
     public void editKontigenter() {
     }
 
-    public void seeKontigenter() {
+    public void setKontigenter() {
     }
 
     public void seeRestance() throws SQLException {
@@ -146,12 +147,13 @@ public class Controller {
         System.out.println("\nMember To be changed:");
         getSpecificMember(tempNewID); //finder den member brugeren inputter
         System.out.println("\nWhat do you want to do?");
-        System.out.println("[1] Update member team\n[2] Update member kontingent");
+        System.out.println("[1] Update member team\n[2] Update member kontingent\n[3] update member active/inactive");
         int input = Integer.parseInt(scanner.nextLine());
-        System.out.println("\nEnter Change: ");
+        System.out.println("\nEnter Change (0/1): ");
         String change = scanner.nextLine();
         System.out.println("Updating member..#" + tempNewID);
         modifyMember(tempNewID, input, change);
+
     }
     public void updateKonkurrence() {
         System.out.println(memberRead.getMember());
@@ -200,14 +202,20 @@ public class Controller {
         return null;
     }
 
-    public void modifyMember(int tempNewID, int input, String change) {
+    public void modifyMember(int memberID, int input, String active) {
         switch (input) {
             case 1://update member team
                 //memberWrite.updateMember(tempNewID, change);
 
                 break;
             case 2://update kontingent
-                memberWrite.updateKontigent(tempNewID, change);
+
+                memberWrite.updateKontingentActive(memberID, active);
+                break;
+
+            case 3://update active membership
+
+                memberWrite.updateMemberActive(memberID, active);
                 break;
         }
     }
