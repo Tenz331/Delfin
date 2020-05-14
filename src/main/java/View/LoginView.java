@@ -27,7 +27,8 @@ public class LoginView { //Vores main controller og Main Menu
                         "  d8888888a                                  `Y8888\n"+
                         " AY/'' `\\Y8b                                  ``Y8b\n"+
                         " Y'      `YP                                       ~~\n"+
-                        "Gruppe '1': Emil, Janus, Mathias\n";
+                        "Gruppe '1': Emil, Janus, Mathias\n"+
+                        " Formand login: user: formand password: formand\n træner: u: træner p: træner \n kassêr: u:kasser p: kasser";
                 sqlCheck = false;
                 System.out.println(loGo);
                 String tempuser;

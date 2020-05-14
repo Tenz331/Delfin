@@ -17,7 +17,7 @@ public class KasserUI {
         System.out.println("Kassêr Menu:\n");
         String PrintMainMenuText = " Skriv: [1] Se restance \n" +
                         " Skriv: [2] Rediger medlem. \n" +
-                        "Skriv: [3] exit.\n " +
+                        " Skriv: [3] exit.\n " +
                         "\nInput:";
         System.out.println(PrintMainMenuText);
         int input = Integer.parseInt(scanner.nextLine());

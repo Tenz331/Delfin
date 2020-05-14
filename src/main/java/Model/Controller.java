@@ -109,11 +109,11 @@ public class Controller {
 
     public void deleteMember() {
         System.out.println(memberRead.getMember());
-        System.out.println("\nWhat Member Do you want to change? >ID#");
+        System.out.println("\nHvilket medlem skal ændres? >ID#");
         int tempNewID = scanner.nextInt();
-        System.out.println("\nMember To be changed:");
+        System.out.println("\nMedlem:");
         getSpecificMember(tempNewID); //finder den member brugeren inputter
-        System.out.println("\nCorrect?\n[1] Yes,\n[2] No, \n[3] Exit.");
+        System.out.println("\nKorrekt?\n[1] Ja,\n[2] Nej, \n[3] Tilbage.");
         int userInput = scanner.nextInt();
         switch (userInput) {
             case 1:
@@ -131,12 +131,12 @@ public class Controller {
 
     public void editMember() {
         System.out.println(memberRead.getMember());
-        System.out.println("\nWhat Member Do you want to change? >ID#");
+        System.out.println("\nHvilket medlem skal ændres? >ID#");
         int tempNewID = scanner.nextInt();
-        System.out.println("\nMember To be changed:");
+        System.out.println("\nMedlem:");
         System.out.println(getSpecificMember(tempNewID)); //finder den member brugeren inputter
-        System.out.println("\nWhat do you want to do?");
-        System.out.println("[1] Update member team\n[2] Update member kontingent\n[3] update member active/inactive");
+        System.out.println("\nHvad vil du?");
+        System.out.println("[1] Medlems hold\n[2] Update medlems kontingent\n[3] update member aktiv/inaktiv");
         int input = scanner.nextInt();
         Members members = getSpecificMember(tempNewID);
         switch (input) {
@@ -191,7 +191,7 @@ public class Controller {
         System.out.println("\nHvad var " + member.name + " tid?");
         String tid = scanner.nextLine();
         memberWrite.addKonkurrence(tid, type, konkurrencenLocation, member);
-        System.out.println("added");
+        System.out.println("Tilføjet..\n");
 
 
     }

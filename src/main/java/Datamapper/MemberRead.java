@@ -64,7 +64,7 @@ public class MemberRead {
                 String fastestTime3 = rs.getString(4);
                 String fastestTime4 = rs.getString(7);
 
-                System.out.println("#" + fastestTime + " Name: " + fastestTime2 + "Disciplin: " + fastestTime3 + " Time: " + fastestTime4 + "\n");
+                System.out.println("#" + fastestTime + " Navn: " + fastestTime2 + "Disciplin: " + fastestTime3 + " Time: " + fastestTime4 + "\n");
             }}
         catch (SQLException e) {
             e.printStackTrace();
@@ -83,7 +83,7 @@ public class MemberRead {
                 String fastestTime3 = rs.getString(4);
                 String fastestTime4 = rs.getString(7);
 
-                System.out.println("#" + fastestTime + " Name: " + fastestTime2 + "Disciplin: " + fastestTime3 + " Time: " + fastestTime4 + "\n");
+                System.out.println("#" + fastestTime + " Navn: " + fastestTime2 + "Disciplin: " + fastestTime3 + " Time: " + fastestTime4 + "\n");
             }}
         catch (SQLException e) {
             e.printStackTrace();
