@@ -103,14 +103,6 @@ public class MemberRead {
         }
         return tempUID;
     } //finder højeste
-    public void getDisciplin() {
-
-    }
-
-    public void getResult() {
-
-    }
-
     public Map<Integer, Members> checkRestance() {
         tempMembers = new HashMap<>();
         try (
