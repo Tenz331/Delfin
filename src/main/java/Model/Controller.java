@@ -4,17 +4,14 @@ package Model;
 import Datamapper.MemberRead;
 import Datamapper.MemberWrite;
 
-
-import java.lang.reflect.Member;
 import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.time.LocalDate;
-import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
 
 public class Controller {
+    static int uId = 0;
     Teams teams = new Teams();
     Scanner scanner = new Scanner(System.in);
     String tempNavn, tempEmail, tempFavSvommeArt, tempSvommeHold;
@@ -24,7 +21,6 @@ public class Controller {
     MemberWrite memberWrite = new MemberWrite();
     Connection connection;
     MemberRead memberRead = new MemberRead();
-    static int uId = 0;
 
     private int generateUnicId() {
         uId++;
@@ -32,18 +28,17 @@ public class Controller {
     }
 
     public void addMember() {
-        System.out.println(LocalDate.now());
         uId = generateUnicId();
 
         System.out.println("Tilføj et nyt medlem:\n");
-        System.out.println("Meldem navn:\n");
+        System.out.println("Medlem navn:\n");
         tempNavn = scanner.nextLine();
         System.out.println("\nEmail:");
         tempEmail = scanner.nextLine();
         System.out.println("\nFødelsdato: ÅÅ-MM-DD:");
         birthDate = LocalDate.parse(scanner.nextLine());
         age = LocalDate.now().getYear() - birthDate.getYear();
-        System.out.println("Svømme Art: \n [1]. Crawl, [2]. brøstsvømming, [3]. rykcrawl, [4]. butterfly");
+        System.out.println("Svømme Art: \n [1]. Crawl, [2]. Brystsvømming, [3]. Rygcrawl, [4]. Butterfly");
         try {
             tempInput = Integer.parseInt(scanner.nextLine());
             switch (tempInput) {
@@ -121,12 +116,12 @@ public class Controller {
     public void deleteMember() {
         System.out.println(memberRead.getMember());
         System.out.println("\nWhat Member Do you want to change? >ID#");
-        int tempNewID = Integer.parseInt(scanner.nextLine());
+        int tempNewID = scanner.nextInt();
         System.out.println("\nMember To be changed:");
         getSpecificMember(tempNewID); //finder den member brugeren inputter
         System.out.println("\nCorrect?\n[1] Yes,\n[2] No, \n[3] Exit.");
-        int userInput = Integer.parseInt(scanner.nextLine());
-        switch (userInput){
+        int userInput = scanner.nextInt();
+        switch (userInput) {
             case 1:
                 memberWrite.deleteMember(tempNewID);
                 break;
@@ -143,34 +138,66 @@ public class Controller {
     public void editMember() {
         System.out.println(memberRead.getMember());
         System.out.println("\nWhat Member Do you want to change? >ID#");
-        int tempNewID = Integer.parseInt(scanner.nextLine());
+        int tempNewID = scanner.nextInt();
         System.out.println("\nMember To be changed:");
         System.out.println(getSpecificMember(tempNewID)); //finder den member brugeren inputter
         System.out.println("\nWhat do you want to do?");
         System.out.println("[1] Update member team\n[2] Update member kontingent\n[3] update member active/inactive");
-        int input = Integer.parseInt(scanner.nextLine());
-        System.out.println("\nEnter Change (0/1): ");
-        String change = scanner.nextLine();
-        System.out.println("Updating member..#" + tempNewID);
-        modifyMember(tempNewID, input, change);
+        int input = scanner.nextInt();
+        Members members = getSpecificMember(tempNewID);
+        switch (input) {
+            case 1:
+                LocalDate age = members.fodselsdag;
+                int ageCalc = LocalDate.now().getYear() - age.getYear();
+                if (ageCalc <= 18) {
+                    tempSvommeHold = "Junior";
+                    memberWrite.updateMember(members, tempSvommeHold, 1);
+
+                } else if (ageCalc <= 59) {
+                    tempSvommeHold = "Senior";
+                    memberWrite.updateMember(members, tempSvommeHold, 1);
+
+                } else {
+                    tempSvommeHold = "Pensonist";
+                    memberWrite.updateMember(members, tempSvommeHold, 1);
+                }
+                System.out.println(members.name + "er blevet ændret til " + tempSvommeHold);
+                break;
+
+            case 2:
+                System.out.println("Tryk 0 for ikke betalt kontingent. Tryk 1 for betalt kontingent.");
+                int userInput = scanner.nextInt();
+
+                memberWrite.updateKontingentActive(members, userInput);
+                break;
+            case 3:
+                System.out.println("Tryk 0 for at gøre bruger inaktiv. Tryk 1 for at gøre bruger aktiv");
+                 userInput = scanner.nextInt();
+                memberWrite.updateMemberActive(members, userInput);
+
+                break;
+            default:
+                break;
+        }
+
 
     }
+
     public void updateKonkurrence() {
         System.out.println(memberRead.getMember());
         System.out.println("\nHvilken medlem skal tilføjes til konkurrence >ID#");
-        int tempNewID = Integer.parseInt(scanner.nextLine());
+        int tempNewID = scanner.nextInt();
         System.out.println("\nMember To be changed:");
         Members member = getSpecificMember(tempNewID); //finder den member brugeren inputter
-        System.out.println("\nHvilken type konkurrence var det OwO?");
+        System.out.println("\nHvilken type konkurrence er det?");
+        scanner.nextLine();
         String type = scanner.nextLine();
         System.out.println("\nHvor blev konkurrencen afholdt?");
         String konkurrencenLocation = scanner.nextLine();
-        System.out.println("\nHvad var "+ member.name +" tid?");
+        System.out.println("\nHvad var " + member.name + " tid?");
         String tid = scanner.nextLine();
-        memberWrite.addKonkurrence(tid,type,konkurrencenLocation,member);
+        memberWrite.addKonkurrence(tid, type, konkurrencenLocation, member);
         System.out.println("added");
-
-
 
 
     }
@@ -178,12 +205,16 @@ public class Controller {
     public void registerBestTime() {
 
         System.out.println(memberRead.getMember());
-        System.out.println("\nWhat Member Do you want to update?");
-        int tempNewID = Integer.parseInt(scanner.nextLine());
+        System.out.println("\nHvilket medlem vil du opdatere?");
+        int tempNewID = scanner.nextInt();
         Members tempmemberlol = getSpecificMember(tempNewID); //finder den member brugeren inputter
-        System.out.println("\nWhat is the members best time?");
-        String bestTime = scanner.nextLine();
-        memberWrite.updateTeam(tempNewID, bestTime, tempmemberlol);
+        System.out.println("Hvilken turnerings disciplin?");
+        String disciplin = scanner.nextLine();
+        System.out.println("Hvor blev turneringen afholdt?");
+        String lokation = scanner.nextLine();
+        System.out.println("\nHvad er medlemmets bedste tid?");
+        double bestTime = scanner.nextDouble();
+        memberWrite.updateTeam(tempNewID, bestTime, tempmemberlol, disciplin, lokation);
 
 
     }
@@ -200,24 +231,6 @@ public class Controller {
             return userInfomation;
         }
         return null;
-    }
-
-    public void modifyMember(int memberID, int input, String active) {
-        switch (input) {
-            case 1://update member team
-                //memberWrite.updateMember(tempNewID, change);
-
-                break;
-            case 2://update kontingent
-
-                memberWrite.updateKontingentActive(memberID, active);
-                break;
-
-            case 3://update active membership
-
-                memberWrite.updateMemberActive(memberID, active);
-                break;
-        }
     }
 
     public void setMember() {

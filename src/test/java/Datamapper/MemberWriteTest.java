@@ -100,7 +100,7 @@ public class MemberWriteTest {
 
                 String query = "INSERT INTO Delfinen.Restance (member_idd, member_name, member_kontigent)" + "values(?,?,?)";
                 PreparedStatement preparedStatement = conn.prepareStatement(query);
-               preparedStatement.setInt(1,i.getUnicID());
+                preparedStatement.setInt(1, i.getUnicID());
                 preparedStatement.setString(2, i.getName());
                 preparedStatement.setDouble(3, i.kontigentBeregner());
                 preparedStatement.execute();
