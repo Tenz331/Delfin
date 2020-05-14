@@ -84,6 +84,7 @@ public class MemberRead {
             e.printStackTrace();
         }
     }
+
     public int getMaxUid() {
         int tempUID = 0;
         //'Connection', 'Statement' and 'ResultSet' are AUTO-CLOSABLE when with TRY-WITH-RESOURCES BLOCK (...)
@@ -103,13 +104,6 @@ public class MemberRead {
         }
         return tempUID;
     } //finder højeste
-    public void getDisciplin() {
-
-    }
-
-    public void getResult() {
-
-    }
 
     public Map<Integer, Members> checkRestance() {
         tempMembers = new HashMap<>();

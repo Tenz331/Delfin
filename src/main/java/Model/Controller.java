@@ -111,9 +111,6 @@ public class Controller {
     public void editKontigenter() {
     }
 
-    public void setKontigenter() {
-    }
-
     public void seeRestance() throws SQLException {
         System.out.println(memberRead.checkRestance());
     }
