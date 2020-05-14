@@ -65,6 +65,25 @@ public class MemberRead {
             e.printStackTrace();
         }
     }
+    public void top5Senior(){
+        try (
+                Statement stmt = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+                ResultSet rs = ((Statement) stmt).executeQuery("SELECT * FROM Delfinen.StatistikDB WHERE member_hold = 'Senior' ORDER BY DB_tid ASC LIMIT 5")
+        ) {
+            System.out.println("Top 5 List Senior:\n ");
+            while (rs.next()) {
+                StringBuffer buffer = new StringBuffer();
+                String fastestTime = rs.getString(2);
+                String fastestTime2 = rs.getString(3);
+                String fastestTime3 = rs.getString(4);
+                String fastestTime4 = rs.getString(7);
+
+                System.out.println("#" + fastestTime + " Name: " + fastestTime2 + "Disciplin: " + fastestTime3 + " Time: " + fastestTime4 + "\n");
+            }}
+        catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
     public int getMaxUid() {
         int tempUID = 0;
         //'Connection', 'Statement' and 'ResultSet' are AUTO-CLOSABLE when with TRY-WITH-RESOURCES BLOCK (...)
@@ -124,5 +143,43 @@ public class MemberRead {
         tempcounter = 0;
         return tempMembers;
 
+    }
+    public Map<Integer, Members> getSpecificMember(int id) {
+        tempMembers = new HashMap<>();
+
+        try {
+            Statement stmt = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+            ResultSet rs = ((Statement) stmt).executeQuery("SELECT * FROM Delfinen.Membership");
+            Statement stmt2 = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY); //hacked fix lol
+            ResultSet rs2 = ((Statement) stmt2).executeQuery("SELECT * FROM Delfinen.Restance");
+            while (rs.next() && rs2.next()) {
+                String teamType = rs.getString("member_hold");
+                int uid = rs.getInt("member_idd");
+                if (teamType.equals("Junior")) {
+                    if (uid == id) {
+                        JuniorMedlem temp = new JuniorMedlem(rs.getInt("member_idd"), rs.getString("member_name"), rs.getString("member_email"), rs.getInt("member_telefon"), rs.getDate("member_fødselsdag").toLocalDate(), rs.getString("member_favSvømmeArt"), rs.getString("member_hold"), rs2.getDouble("member_kontigent"), rs.getBoolean("betalt_kontigent"));
+                        tempMembers.put(id, temp);
+                        return tempMembers;
+
+                    }
+                } else if (teamType.equals("Senior")) {
+                    if (uid == id) {
+                        SeniorMedlem temp = new SeniorMedlem(rs.getInt("member_idd"), rs.getString("member_name"), rs.getString("member_email"), rs.getInt("member_telefon"), rs.getDate("member_fødselsdag").toLocalDate(), rs.getString("member_favSvømmeArt"), rs.getString("member_hold"), rs2.getDouble("member_kontigent"), rs.getBoolean("betalt_kontigent"));
+                        tempMembers.put(id, temp);
+                        return tempMembers;
+
+                    }
+                } else {
+                    if (uid == id) {
+                        PensionistMedlem temp = new PensionistMedlem(rs.getInt("member_idd"), rs.getString("member_name"), rs.getString("member_email"), rs.getInt("member_telefon"), rs.getDate("member_fødselsdag").toLocalDate(), rs.getString("member_favSvømmeArt"), rs.getString("member_hold"), rs2.getDouble("member_kontigent"), rs.getBoolean("betalt_kontigent"));
+                        tempMembers.put(id, temp);
+                        return tempMembers;
+                    }
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 }
