@@ -16,9 +16,8 @@ public class KasserUI {
         System.out.println("Logged in som: Kassêr\n");
         System.out.println("Kassêr Menu:\n");
         String PrintMainMenuText = " Skriv: [1] Se restance \n" +
-                        " Skriv: [2] Se kontingenter. \n" +
-                        " Skriv: [3] Ændre kontigenter. \n" +
-                        "Skriv: [4] exit.\n " +
+                        " Skriv: [2] Rediger medlem. \n" +
+                        "Skriv: [3] exit.\n " +
                         "\nInput:";
         System.out.println(PrintMainMenuText);
         int input = Integer.parseInt(scanner.nextLine());
@@ -28,21 +27,17 @@ public class KasserUI {
                 printMenu();
                 break;
             case 2:
-                controller.editKontigenter();
+                controller.editMember();
                 printMenu();
-
                 break;
             case 3:
-
-                printMenu();
-
-                break;
-            case 4:
-
-                printMenu();
+                System.out.println("Goodbye");
+                System.exit(0);
                 break;
             default:
-                break;
+                System.out.println("Error in input: '" + input + "'");
+                printMenu();
+
         }
     }
 }

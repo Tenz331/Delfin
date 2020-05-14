@@ -89,6 +89,7 @@ public class MemberRead {
             e.printStackTrace();
         }
     }
+
     public int getMaxUid() {
         int tempUID = 0;
         //'Connection', 'Statement' and 'ResultSet' are AUTO-CLOSABLE when with TRY-WITH-RESOURCES BLOCK (...)
@@ -108,6 +109,7 @@ public class MemberRead {
         }
         return tempUID;
     } //finder højeste
+
     public Map<Integer, Members> checkRestance() {
         tempMembers = new HashMap<>();
         try (
@@ -115,7 +117,7 @@ public class MemberRead {
                 ResultSet rs = ((Statement) stmt).executeQuery("SELECT * FROM Delfinen.Membership WHERE betalt_kontigent = '0' ")
 
         ) {
-            while (rs.next()) {
+            while(rs.next()) {
                 String teamType = rs.getString("member_hold");
                 tempcounter++;
                 if (teamType.equals("Junior")) {
