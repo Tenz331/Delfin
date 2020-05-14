@@ -98,10 +98,11 @@ public class MemberWriteTest {
             for (Members i : tempmembers) {
                 System.out.println(i.getName().toString() + " >< " + i.kontigentBeregner());
 
-                String query = "INSERT INTO Delfinen.Restance (member_name, member_kontigent)" + "values(?,?)";
+                String query = "INSERT INTO Delfinen.Restance (member_idd, member_name, member_kontigent)" + "values(?,?,?)";
                 PreparedStatement preparedStatement = conn.prepareStatement(query);
-                preparedStatement.setString(1, i.getName());
-                preparedStatement.setDouble(2, i.kontigentBeregner());
+               preparedStatement.setInt(1,i.getUnicID());
+                preparedStatement.setString(2, i.getName());
+                preparedStatement.setDouble(3, i.kontigentBeregner());
                 preparedStatement.execute();
             }
         } catch (SQLException e) {
