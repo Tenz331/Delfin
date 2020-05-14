@@ -44,7 +44,6 @@ public class DBConnect {
             connection = DriverManager.getConnection(totalUrl, user, password);
             System.out.println("login succesfull");
             System.out.println("Welcome: '" + user + "'\n");
-            connection.close();
 
         } catch (SQLException e) {
             System.out.println("LOGIN ERROR!");

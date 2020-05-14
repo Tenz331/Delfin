@@ -145,7 +145,7 @@ public class Controller {
         System.out.println("\nWhat Member Do you want to change? >ID#");
         int tempNewID = Integer.parseInt(scanner.nextLine());
         System.out.println("\nMember To be changed:");
-        getSpecificMember(tempNewID); //finder den member brugeren inputter
+        System.out.println(getSpecificMember(tempNewID)); //finder den member brugeren inputter
         System.out.println("\nWhat do you want to do?");
         System.out.println("[1] Update member team\n[2] Update member kontingent\n[3] update member active/inactive");
         int input = Integer.parseInt(scanner.nextLine());
@@ -161,14 +161,14 @@ public class Controller {
         int tempNewID = Integer.parseInt(scanner.nextLine());
         System.out.println("\nMember To be changed:");
         Members member = getSpecificMember(tempNewID); //finder den member brugeren inputter
-        System.out.println("\nHvilken type konkurrence var det owo?");
+        System.out.println("\nHvilken type konkurrence var det OwO?");
         String type = scanner.nextLine();
-
         System.out.println("\nHvor blev konkurrencen afholdt?");
         String konkurrencenLocation = scanner.nextLine();
         System.out.println("\nHvad var "+ member.name +" tid?");
-        double tid =  Double.parseDouble(scanner.nextLine());
+        String tid = scanner.nextLine();
         memberWrite.addKonkurrence(tid,type,konkurrencenLocation,member);
+        System.out.println("added");
 
 
 
@@ -190,11 +190,11 @@ public class Controller {
 
     public Members getSpecificMember(int tempNewID) {
         Map<Integer, Members> teams;
-        teams = memberRead.getMember();
+        teams = memberRead.getSpecificMember(tempNewID);
 
         for (Map.Entry<Integer, Members> entry : teams.entrySet()) {
             Members userInfomation = entry.getValue();
-            if (userInfomation.unicID == tempNewID) {
+            if (tempNewID == userInfomation.unicID) {
                 System.out.println("#" + userInfomation.unicID + ", navn: " + userInfomation.name + ", Kontigent: " + userInfomation.kontingent + " KR.");
             }
             return userInfomation;
