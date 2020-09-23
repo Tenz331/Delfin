@@ -23,7 +23,7 @@ public class MemberWriteTest {
     double randomValue;
 
     @Before
-    public void setUp() throws Exception {
+    public void setUp() throws Exception {//scuffed
         SeniorMedlem n1 = new SeniorMedlem(1, "Pernille Blume", "PernilleBlume@mail.com", 21415161, LocalDate.now(), "Crawl", "Senior", 1600, false);
         SeniorMedlem n2 = new SeniorMedlem(2, "Julie Kepp Jensen", "JulieKeppJensen@mail.com", 32313, LocalDate.now(), "RykCrawl", "Senior", 1600, true);
         SeniorMedlem n3 = new SeniorMedlem(3, "Emily Gantriis", "Emily_Gantriis@mail.com", 423424234, LocalDate.parse("1999-04-03"), "RykCrawl", "Senior", 1600, false);
@@ -56,7 +56,8 @@ public class MemberWriteTest {
         tempmembers.add(newPensionist3);
         tempmembers.add(newPensionist4);
         tempmembers.add(newPensionist5);
-    }
+    }/*af
+     */
 
 
     @Test
@@ -67,7 +68,7 @@ public class MemberWriteTest {
             for (Members i : tempmembers) {
                 count++;
                 if (count <= amountoftestmembers) {
-                    System.out.println(i.getName().toString());
+                    System.out.println(i.getName());
                     String query = "INSERT INTO Delfinen.Membership (member_idd, member_name, member_email, member_telefon, member_fødselsdag, member_favSvømmeart, member_hold, betalt_kontigent, member_aktiv)" + "values(?,?,?,?,?,?,?,?,?)";
                     PreparedStatement preparedStatement = conn.prepareStatement(query);
                     preparedStatement.setInt(1, i.getUnicID());
@@ -87,7 +88,7 @@ public class MemberWriteTest {
             System.out.println("\n Members Test data done!\n");
             setKonti();
 
-        } catch (Exception e) {
+        } catch (SQLException e) {
             System.out.println(e);
         }
     }
@@ -96,7 +97,7 @@ public class MemberWriteTest {
         Connection conn = DriverManager.getConnection(CONN_STR, USERNAME, PASSWORD);
         try {
             for (Members i : tempmembers) {
-                System.out.println(i.getName().toString() + " >< " + i.kontigentBeregner());
+                System.out.println(i.getName() + " >< " + i.kontigentBeregner());
 
                 String query = "INSERT INTO Delfinen.Restance (member_idd, member_name, member_kontigent)" + "values(?,?,?)";
                 PreparedStatement preparedStatement = conn.prepareStatement(query);
@@ -113,12 +114,10 @@ public class MemberWriteTest {
 
     }
 
-
-
     public void setKonk() throws SQLException {
         Connection conn = DriverManager.getConnection(CONN_STR, USERNAME, PASSWORD);
-        String[] type = {"50 fir","100 fri","200 fri", "50 ryg"};
-        String[] konkurrencenLocation = {"København","Hillerød","Randers","Lyngby"};
+        String[] type = {"50 fir", "100 fri", "200 fri", "50 ryg"};
+        String[] konkurrencenLocation = {"København", "Hillerød", "Randers", "Lyngby"};
 
         try {
             for (Members i : tempmembers) {
@@ -136,7 +135,7 @@ public class MemberWriteTest {
                 preparedStatement.setString(3, type[random]);
                 preparedStatement.setString(4, konkurrencenLocation[random]);
                 preparedStatement.setString(5, i.getSvommeHold());
-                preparedStatement.setString(6,df.format(randomValue));
+                preparedStatement.setString(6, df.format(randomValue));
                 preparedStatement.execute();
             }
         } catch (SQLException e) {

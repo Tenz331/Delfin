@@ -20,9 +20,9 @@ public class MemberRead {
         try (
 
                 Statement stmt = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
-                ResultSet rs = ((Statement) stmt).executeQuery("SELECT * FROM Delfinen.Membership");
+                ResultSet rs = stmt.executeQuery("SELECT * FROM Delfinen.Membership");
                 Statement stmt2 = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
-                ResultSet rs2 = ((Statement) stmt2).executeQuery("SELECT * FROM Delfinen.Restance");
+                ResultSet rs2 = stmt2.executeQuery("SELECT * FROM Delfinen.Restance")
         ) {
             while(rs.next() && rs2.next()) {
                 tempcounter++;
@@ -54,7 +54,7 @@ public class MemberRead {
     public void top5Junior(){
         try (
                 Statement stmt = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
-                ResultSet rs = ((Statement) stmt).executeQuery("SELECT * FROM Delfinen.StatistikDB WHERE member_hold = 'Junior' ORDER BY DB_tid ASC LIMIT 5")
+                ResultSet rs = stmt.executeQuery("SELECT * FROM Delfinen.StatistikDB WHERE member_hold = 'Junior' ORDER BY DB_tid ASC LIMIT 5")
         ) {
             System.out.println("Top 5 List Junior:\n ");
             while (rs.next()) {
@@ -73,7 +73,7 @@ public class MemberRead {
     public void top5Senior(){
         try (
                 Statement stmt = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
-                ResultSet rs = ((Statement) stmt).executeQuery("SELECT * FROM Delfinen.StatistikDB WHERE member_hold = 'Senior' ORDER BY DB_tid ASC LIMIT 5")
+                ResultSet rs = stmt.executeQuery("SELECT * FROM Delfinen.StatistikDB WHERE member_hold = 'Senior' ORDER BY DB_tid ASC LIMIT 5")
         ) {
             System.out.println("Top 5 List Senior:\n ");
             while (rs.next()) {
@@ -95,7 +95,7 @@ public class MemberRead {
         //'Connection', 'Statement' and 'ResultSet' are AUTO-CLOSABLE when with TRY-WITH-RESOURCES BLOCK (...)
         try (
                 Statement stmt = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
-                ResultSet rs = ((Statement) stmt).executeQuery("SELECT MAX(member_idd) FROM Delfinen.Membership")
+                ResultSet rs = stmt.executeQuery("SELECT MAX(member_idd) FROM Delfinen.Membership")
         ) {
             while (rs.next()) {
                 tempUID = rs.getInt("MAX(member_idd)");
@@ -114,7 +114,7 @@ public class MemberRead {
         tempMembers = new HashMap<>();
         try (
                 Statement stmt = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
-                ResultSet rs = ((Statement) stmt).executeQuery("SELECT * FROM Delfinen.Membership WHERE betalt_kontigent = '0' ")
+                ResultSet rs = stmt.executeQuery("SELECT * FROM Delfinen.Membership WHERE betalt_kontigent = '0' ")
 
         ) {
             while(rs.next()) {
@@ -148,9 +148,9 @@ public class MemberRead {
 
         try {
             Statement stmt = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
-            ResultSet rs = ((Statement) stmt).executeQuery("SELECT * FROM Delfinen.Membership");
+            ResultSet rs = stmt.executeQuery("SELECT * FROM Delfinen.Membership");
             Statement stmt2 = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY); //hacked fix lol
-            ResultSet rs2 = ((Statement) stmt2).executeQuery("SELECT * FROM Delfinen.Restance");
+            ResultSet rs2 = stmt2.executeQuery("SELECT * FROM Delfinen.Restance");
             while (rs.next() && rs2.next()) {
                 String teamType = rs.getString("member_hold");
                 int uid = rs.getInt("member_idd");

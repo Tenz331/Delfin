@@ -2,7 +2,6 @@ package Datamapper;
 
 import Model.Members;
 import Util.DBConnect;
-
 import java.sql.*;
 import java.util.ArrayList;
 
@@ -17,7 +16,7 @@ public class MemberWrite {
             tempmembers = new ArrayList<>();
             tempmembers.add(members);
             for (Members i : tempmembers) {
-                System.out.println(i.getName().toString());
+                System.out.println(i.getName());
                 String query = "INSERT INTO Delfinen.Membership (member_idd, member_name, member_email, member_telefon, member_fødselsdag, member_favSvømmeart, member_hold, betalt_kontigent, member_aktiv)" + "values(?,?,?,?,?,?,?,?,?)";
                 PreparedStatement preparedStatement = conn.prepareStatement(query);
                 preparedStatement.setInt(1, i.getUnicID());
@@ -140,11 +139,7 @@ public class MemberWrite {
 
     public void updateMember(Members members, String update, int change) {
         boolean tempbool;
-        if (update.equals("true")) {
-            tempbool = true;
-        }else {
-            tempbool = false;
-        }
+        tempbool = update.equals("true");
         try {
             switch (change) {
                 case 1:

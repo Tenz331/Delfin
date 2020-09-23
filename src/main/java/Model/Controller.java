@@ -166,7 +166,7 @@ public class Controller {
                 break;
             case 3:
                 System.out.println("Tryk 0 for at gøre bruger inaktiv. Tryk 1 for at gøre bruger aktiv");
-                 userInput = scanner.nextInt();
+                userInput = scanner.nextInt();
                 memberWrite.updateMemberActive(members, userInput);
 
                 break;

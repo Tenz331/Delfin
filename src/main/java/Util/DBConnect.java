@@ -35,13 +35,12 @@ public class DBConnect {
 
     public static String Login(String user, String password) throws SQLException {
         try {
-            Connection connection;
             String baseurl = "jdbc:mysql://cphb-gruppe1.c4mqzn3xlkdy.us-east-2.rds.amazonaws.com/"; //url
             String db = "Delfinen";//database
 
             String timeZ = "serverTimezone=GMT&allowPublicKeyRetrieval=true"; //noget fra thor idk wwhat it really does
             String totalUrl = baseurl + db + "?" + timeZ; //sætter linked sammen med 'timeZ'
-            connection = DriverManager.getConnection(totalUrl, user, password);
+            DriverManager.getConnection(totalUrl, user, password);
             System.out.println("login succesfull");
             System.out.println("Welcome: '" + user + "'\n");
 
